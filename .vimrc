@@ -342,6 +342,10 @@ set ttyfast
         endif
     " }
 
+    " Emmet {
+        let g:user_emmet_leader_key='<C-E>'
+    " }
+
     " Ctags {
         set tags=./tags;/,~/.vimtags
 
