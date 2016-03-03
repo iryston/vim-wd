@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 #   Copyright 2016 Igor R. Plity
 #
@@ -127,9 +127,8 @@ create_symlinks() {
     mkdir -p "$source_path/.vim/bundle"
   fi
 
-  lnif "$source_path/.vimrc"         "$target_path/.vimrc"
-  lnif "$source_path/.vimrc.bundles" "$target_path/.vimrc.bundles"
-  lnif "$source_path/.vim"           "$target_path/.vim"
+  lnif "$source_path/.vimrc"             "$target_path/.vimrc"
+  lnif "$source_path/.vim"               "$target_path/.vim"
 
   if program_exists "nvim"; then
     lnif "$source_path/.vim"       "$target_path/.config/nvim"
@@ -230,7 +229,7 @@ add_spellcheck  "$APP_PATH"
 
 install_bundler "$APP_PATH"
 
-setup_bundler   "$APP_PATH/.vimrc.bundles"
+setup_bundler   "$APP_PATH/.vimrc.bundles.vim"
 
 msg             "\nThanks for installing $app_name"
 msg             "© `date +%Y` https://github.com/iryston/vim-wd"

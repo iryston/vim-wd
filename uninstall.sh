@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 app_dir="$HOME/.vim-wd"
 
@@ -12,7 +12,6 @@ die() {
 }
 
 rm $HOME/.vimrc
-rm $HOME/.vimrc.bundles
 rm $HOME/.vim
 
 rm -rf $app_dir

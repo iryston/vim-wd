@@ -1,8 +1,8 @@
 " vim: set sw=2 ts=2 sts=2 et tw=0 foldmarker={,} foldlevel=0 foldmethod=marker
 
 " Use bundles config {
-    if filereadable(expand("~/.vimrc.bundles"))
-        source ~/.vimrc.bundles
+    if filereadable(expand("~/.vim/.vimrc.bundles.vim"))
+        source ~/.vim/.vimrc.bundles.vim
     endif
 " }
 
@@ -149,7 +149,6 @@
     set foldlevel=99                " Don't autofold anything (but I can still fold manually)
     set listchars=tab:›\ ,eol:¶,trail:•,extends:»,precedes:«,nbsp:. " Highlight problematic whitespace
     set nolist                      " Display unprintable characters <C-h> - switches
-    set shellcmdflag=-ic            " Make Vim’s :! shell behave like command prompt
 
 " }
 
