@@ -309,6 +309,9 @@ set ttyfast
     " show/Hide hidden Chars
     map <silent> <C-h> :set invlist<CR>
 
+    " Easier switch background between dark and light
+    nnoremap cob :set background=<C-R>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
+
 " }
 
 " Plugins {
