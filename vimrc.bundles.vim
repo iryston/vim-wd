@@ -216,7 +216,6 @@
       Plug 'szw/vim-g'
       Plug 'tpope/vim-cucumber'
       Plug 'tpope/vim-markdown'
-      Plug 'greyblake/vim-preview'
     endif
   " }
 " }
