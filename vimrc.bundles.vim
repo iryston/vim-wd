@@ -39,8 +39,8 @@
   call plug#begin(bundle)
 
   " Dependences {
-    Plug 'MarcWeber/vim-addon-mw-utils'
-    Plug 'tomtom/tlib_vim'
+    Plug 'MarcWeber/vim-addon-mw-utils' " Various utils such as caching interpreted contents of files
+    Plug 'tomtom/tlib_vim' " This library provides some utility functions
     Plug 'godlygeek/csapprox' " Make gvim-only colorschemes work transparently in terminal vim
     if executable('ag')
       Plug 'mileszs/ack.vim'
@@ -56,7 +56,7 @@
   " }
 
   " Available bundle groups:
-  " ['general', 'colorschemes', 'writing', 'programming', 'codecompletion', 'go', 'haskell', 'html', 'javascript', 'php', 'python', 'ruby', 'scala', 'misc']
+  " ['general', 'colorschemes', 'writing', 'programming', 'codecompletion', 'clojure', 'go', 'haskell', 'html', 'javascript', 'php', 'python', 'ruby', 'scala', 'misc']
 
     let g:bundle_groups=['general', 'colorschemes', 'writing', 'programming', 'codecompletion', 'html', 'javascript', 'php', 'python', 'ruby', 'misc']
 
@@ -65,12 +65,12 @@
       Plug 'vim-airline/vim-airline' " Lean & mean status/tabline for vim that's light as air
       Plug 'bling/vim-bufferline' " Super simple vim plugin to show the list of buffers in the command bar
       Plug 'ctrlpvim/ctrlp.vim' " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
-      "Plug 'gcmt/wildfire.vim' " With Wildfire you can quickly select the closest text object among a group of candidates
-      Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim
+      Plug 'gcmt/wildfire.vim' " With Wildfire you can quickly select the closest text object among a group of candidates
+      Plug 'scrooloose/nerdtree', { 'on': '<Plug>NERDTreeTabsToggle' } " A tree explorer plugin for vim
       Plug 'jistr/vim-nerdtree-tabs' " NERDTree and tabs together in Vim, painlessly
       "Plug 'lyokha/vim-xkbswitch'
       Plug 'vim-scripts/matchit.zip' " Extended % matching for HTML, LaTeX, and many other languages
-      Plug 'mbbill/undotree' " Visualize undo-tree
+      Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " Visualize undo-tree
       Plug 'mhinz/vim-signify' " Signs to indicate added, modified and removed lines based on data of an underlying version control system
       Plug 'nathanaelkane/vim-indent-guides' " Visually display indent levels in Vim
       Plug 'osyo-manga/vim-over' " Highlights the {pattern} parameter from |:substitute| {pattern}
@@ -110,8 +110,8 @@
       Plug 'godlygeek/tabular'
       Plug 'mattn/gist-vim'
       Plug 'mattn/webapi-vim'
-      Plug 'scrooloose/syntastic'
-      Plug 'tpope/vim-commentary'
+      Plug 'scrooloose/syntastic' " , { 'on': 'SyntasticCheck' } Lint
+      Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' } " Comment stuff out
       Plug 'tpope/vim-fugitive'
       if executable('ctags')
         Plug 'majutsushi/tagbar'
@@ -131,6 +131,16 @@
       Plug 'mattn/emmet-vim'
     endif
   " }
+
+  " Clojure {
+    if count(g:bundle_groups, 'clojure')
+      Plug 'kovisoft/paredit',    { 'for': 'clojure' }
+      Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+      Plug 'guns/vim-clojure-static'
+      Plug 'guns/vim-clojure-highlight'
+    endif
+  " }
+
   " Go Lang {
     if count(g:bundle_groups, 'go')
       Plug 'fatih/vim-go'
@@ -186,20 +196,21 @@
       Plug 'pythoncomplete'
       Plug 'python_match.vim'
       Plug 'yssource/python.vim'
+      Plug 'Glench/Vim-Jinja2-Syntax'
     endif
   " }
 
   " Scala {
     if count(g:bundle_groups, 'scala')
-      Plug 'derekwyatt/vim-sbt'
-      Plug 'derekwyatt/vim-scala'
+      Plug 'derekwyatt/vim-sbt', { 'for': ['scala', 'sbt.scala'] }
+      Plug 'derekwyatt/vim-scala', { 'for': ['scala', 'sbt.scala'] }
       Plug 'xptemplate'
     endif
   " }
 
   " Ruby {
     if count(g:bundle_groups, 'ruby')
-      Plug 'tpope/vim-rails'
+      Plug 'tpope/vim-rails', { 'for': [] }
       let g:rubycomplete_buffer_loading = 1
       "let g:rubycomplete_classes_in_global = 1
       "let g:rubycomplete_rails = 1
