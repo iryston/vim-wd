@@ -65,7 +65,6 @@
       Plug 'vim-airline/vim-airline' " Lean & mean status/tabline for vim that's light as air
       Plug 'bling/vim-bufferline' " Super simple vim plugin to show the list of buffers in the command bar
       Plug 'ctrlpvim/ctrlp.vim' " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
-      Plug 'gcmt/wildfire.vim' " With Wildfire you can quickly select the closest text object among a group of candidates
       Plug 'scrooloose/nerdtree', { 'on': '<Plug>NERDTreeTabsToggle' } " A tree explorer plugin for vim
       Plug 'jistr/vim-nerdtree-tabs' " NERDTree and tabs together in Vim, painlessly
       "Plug 'lyokha/vim-xkbswitch'
