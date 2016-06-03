@@ -226,6 +226,7 @@
       Plug 'szw/vim-g'
       Plug 'tpope/vim-cucumber'
       Plug 'tpope/vim-markdown'
+      Plug 'keith/tmux.vim'
     endif
   " }
 " }
