@@ -371,6 +371,13 @@
     let g:snips_author = 'Igor R. Plity <iryston@iryston.net>'
   " }
 
+  " Startify {
+    " Disable random quotes header
+    let g:startify_custom_header = []
+    " Prevent CtrlP to open a split in Startify
+    let g:ctrlp_reuse_window = 'startify'
+  " }
+
   " Syntastic {
     " run the php checker first, and if no errors are found, run phpcs, and then phpmd
     let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
