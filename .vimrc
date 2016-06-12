@@ -593,6 +593,9 @@
       "let &t_SI = "\<Esc>]12;Blue\x7"
       "let &t_EI = "\<Esc>]12;NavyBlue\x7"
     endif
+    if has("nvim")
+      set termguicolors
+    endif
     set background=dark
     colorscheme gruvbox
   endif
