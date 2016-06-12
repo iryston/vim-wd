@@ -587,19 +587,13 @@
     "LuciusBlackLowContrast
   else
     if &term == 'xterm' || &term == 'xterm-256color' || &term == 'screen'
-      set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
+      set t_Co=256 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
       "let &t_SI = "\<Esc>]12;Blue\x7"
       "let &t_EI = "\<Esc>]12;NavyBlue\x7"
     endif
     set background=dark
     colorscheme gruvbox
-    "LuciusBlackLowContrast
-    "set term=builtin_ansi       " Make arrow and other keys work
   endif
-  "autocmd InsertEnter * set cul
-  "autocmd InsertLeave * set nocul
-  "   au InsertLeave * hi Cursor guifg=Black guibg=Green ctermfg=Black ctermbg=Green
-  "  au InsertEnter * hi Cursor guifg=Black guibg=Red ctermfg=Black ctermbg=Red
 
   set noshowmode " Don't show the mode since Powerline shows it
   set title " Set the title of the window in the terminal to the file
