@@ -84,7 +84,7 @@
     endif
   " }
 
-  " Color Schemas {
+  " Color Schemes {
     if count(g:bundle_groups, 'colorschemes')
       Plug 'morhetz/gruvbox'
     endif
