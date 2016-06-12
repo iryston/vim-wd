@@ -86,11 +86,7 @@
 
   " Color Schemas {
     if count(g:bundle_groups, 'colorschemes')
-      Plug 'vim-airline/vim-airline-themes'
-      Plug 'jonathanfilip/vim-lucius'
-      Plug 'jpo/vim-railscasts-theme'
       Plug 'morhetz/gruvbox'
-      Plug 'mhinz/vim-janah'
     endif
   " }
 
@@ -115,7 +111,6 @@
       if executable('ctags')
         Plug 'majutsushi/tagbar'
       endif
-      Plug 'luochen1990/rainbow' " Rainbow Parentheses Improved
     endif
   " }
 
@@ -191,7 +186,7 @@
   " Python {
     if count(g:bundle_groups, 'python')
       " Pick either python-mode or pyflakes & pydoc
-      Plug 'klen/python-mode'
+      "Plug 'klen/python-mode'
       Plug 'pythoncomplete'
       Plug 'python_match.vim'
       Plug 'yssource/python.vim'

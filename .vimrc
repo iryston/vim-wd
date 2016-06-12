@@ -559,9 +559,7 @@
     " See `:echo g:airline_theme_map` for some more choices
     " Default in terminal vim is 'dark'
     if isdirectory(expand("~/.vim/bundle/vim-airline/"))
-      if !exists('g:airline_theme')
-        let g:airline_theme = 'gruvbox'
-      endif
+      let g:airline_theme = 'gruvbox'
       if !exists('g:airline_powerline_fonts')
         " Use the default set of separators with a few customizations
         let g:airline_left_sep='›'  " Slightly fancier than '>'
