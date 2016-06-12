@@ -587,7 +587,6 @@
     endif
     set background=dark
     colorscheme gruvbox
-    "LuciusBlackLowContrast
   else
     if &term == 'xterm' || &term == 'xterm-256color' || &term == 'screen'
       set t_Co=256 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
