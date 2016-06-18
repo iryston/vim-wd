@@ -213,6 +213,7 @@
 
   " Misc {
     if count(g:bundle_groups, 'misc')
+      Plug 'evanmiller/nginx-vim-syntax'
       Plug 'freitass/todo.txt-vim'
       Plug 'mhinz/vim-startify'
       Plug 'quentindecock/vim-cucumber-align-pipes'
