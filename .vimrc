@@ -321,6 +321,12 @@
 
 " Plugins {
 
+  " EditorConfig Vim Plugin {
+    if isdirectory(expand("~/.vim/bundle/editorconfig-vim"))
+      let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+    endif
+  " }
+
   " PIV {
     if isdirectory(expand("~/.vim/bundle/PIV"))
       let g:DisableAutoPHPFolding = 1

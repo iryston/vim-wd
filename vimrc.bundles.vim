@@ -111,6 +111,7 @@
       if executable('ctags')
         Plug 'majutsushi/tagbar'
       endif
+      Plug 'editorconfig/editorconfig-vim'
     endif
   " }
 
