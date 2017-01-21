@@ -173,6 +173,7 @@
       Plug 'elzr/vim-json'
       Plug 'groenewege/vim-less'
       Plug 'kchmck/vim-coffee-script'
+      Plug 'leafgarland/typescript-vim'
       Plug 'pangloss/vim-javascript'
     endif
   " }
