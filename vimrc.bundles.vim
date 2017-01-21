@@ -225,6 +225,7 @@
       Plug 'tpope/vim-cucumber'
       Plug 'tpope/vim-markdown'
       Plug 'keith/tmux.vim'
+      Plug 'Chiel92/vim-autoformat'
     endif
   " }
 " }
