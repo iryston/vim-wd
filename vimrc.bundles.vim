@@ -180,7 +180,7 @@
   " PHP {
     if count(g:bundle_groups, 'php')
       Plug 'arnaud-lb/vim-php-namespace'
-      Plug 'beyondwords/vim-twig'
+      Plug 'lumiliet/vim-twig'
       Plug 'spf13/PIV'
     endif
   " }
