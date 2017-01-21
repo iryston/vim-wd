@@ -46,5 +46,5 @@ Alternatively you can manually perform the following steps. If anything has chan
 ```bash
 cd $HOME/.vim-wd/
 git pull
-vim +PlugInstall +PlugClean! +qall
+vim +PlugUpgrade +PlugClean! +PlugInstall +PlugUpdate +qall
 ```
