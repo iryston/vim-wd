@@ -159,7 +159,6 @@
 
   " HTML {
     if count(g:bundle_groups, 'html')
-      Plug 'amirh/HTML-AutoCloseTag'
       Plug 'ap/vim-css-color'
       Plug 'hail2u/vim-css3-syntax'
       Plug 'tpope/vim-haml'
