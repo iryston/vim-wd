@@ -111,7 +111,7 @@
       Plug 'tpope/vim-fugitive'
       Plug 'junegunn/gv.vim'
       if executable('ctags')
-        Plug 'majutsushi/tagbar'
+        Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
       endif
       Plug 'editorconfig/editorconfig-vim'
     endif
