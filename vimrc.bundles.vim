@@ -123,13 +123,13 @@
       if filereadable(expand("~/.vim/bundle/vim-snippets/snippets/support_functions.vim"))
         source ~/.vim/bundle/vim-snippets/snippets/support_functions.vim
       endif
-      Plug 'mattn/emmet-vim', { 'for': ['htm', 'html'] }
+      Plug 'mattn/emmet-vim', { 'for': 'html' }
     endif
   " }
 
   " Clojure {
     if count(g:bundle_groups, 'clojure')
-      Plug 'kovisoft/paredit',    { 'for': 'clojure' }
+      Plug 'kovisoft/paredit', { 'for': 'clojure' }
       Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
       Plug 'guns/vim-clojure-static'
       Plug 'guns/vim-clojure-highlight'
