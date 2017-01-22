@@ -110,6 +110,7 @@
       Plug 'scrooloose/syntastic'
       Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' } " Comment stuff out
       Plug 'tpope/vim-fugitive'
+      Plug 'junegunn/gv.vim'
       if executable('ctags')
         Plug 'majutsushi/tagbar'
       endif
