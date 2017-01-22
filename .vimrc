@@ -188,7 +188,7 @@ set ttyfast
 
 " Key (re)Mappings {
 
-"let mapleader = '\' " The default leader is '\'
+" The default leader is '\'
 let mapleader      = ' '
 let maplocalleader = ' '
 
