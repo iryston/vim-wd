@@ -384,6 +384,9 @@ nmap ga <Plug>(EasyAlign)
 
 " FZF {
 " Search includes hidden files (HFiles)
+" TODO: need more work
+" - check if ag is installed;
+" - choose right word for command.
 command! -bang -nargs=? -complete=dir HFiles
   \ call fzf#vim#files(<q-args>, {'source': 'ag --hidden --ignore .git -g ""'}, <bang>0)
 " }
