@@ -105,7 +105,7 @@
       Plug 'godlygeek/tabular'
       Plug 'mattn/gist-vim'
       Plug 'mattn/webapi-vim'
-      Plug 'scrooloose/syntastic' " , { 'on': 'SyntasticCheck' } Lint
+      Plug 'scrooloose/syntastic'
       Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' } " Comment stuff out
       Plug 'tpope/vim-fugitive'
       if executable('ctags')
@@ -123,7 +123,7 @@
       if filereadable(expand("~/.vim/bundle/vim-snippets/snippets/support_functions.vim"))
         source ~/.vim/bundle/vim-snippets/snippets/support_functions.vim
       endif
-      Plug 'mattn/emmet-vim'
+      Plug 'mattn/emmet-vim', { 'for': ['htm', 'html'] }
     endif
   " }
 
@@ -173,7 +173,7 @@
       Plug 'groenewege/vim-less'
       Plug 'kchmck/vim-coffee-script'
       Plug 'leafgarland/typescript-vim'
-      Plug 'pangloss/vim-javascript'
+      Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
     endif
   " }
 
@@ -215,17 +215,18 @@
 
   " Misc {
     if count(g:bundle_groups, 'misc')
+      "Plug 'rodjek/vim-puppet'
+      Plug 'Chiel92/vim-autoformat'
       Plug 'evanmiller/nginx-vim-syntax'
       Plug 'freitass/todo.txt-vim'
+      Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+      Plug 'keith/tmux.vim'
       Plug 'mhinz/vim-startify'
       Plug 'quentindecock/vim-cucumber-align-pipes'
-      "Plug 'rodjek/vim-puppet'
       Plug 'rust-lang/rust.vim'
       Plug 'szw/vim-g'
       Plug 'tpope/vim-cucumber'
       Plug 'tpope/vim-markdown'
-      Plug 'keith/tmux.vim'
-      Plug 'Chiel92/vim-autoformat'
     endif
   " }
 " }
