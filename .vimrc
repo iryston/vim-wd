@@ -157,16 +157,16 @@ set nolist                      " Display unprintable characters <C-h> - switche
 
 " Formatting {
 
-set nowrap                      " Do not wrap long lines
-set autoindent                  " Indent at the same level of the previous line
-set shiftwidth=2                " Use indents of 2 spaces
-set expandtab                   " Tabs are spaces, not tabs
-set tabstop=2                   " An indentation every four columns
-set softtabstop=2               " Let backspace delete indent
-set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
-set splitright                  " Puts new vsplit windows to the right of the current
-set splitbelow                  " Puts new split windows to the bottom of the current
-set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+set nowrap            " Do not wrap long lines
+set autoindent        " Indent at the same level of the previous line
+set shiftwidth=2      " Use indents of 2 spaces
+set expandtab         " Tabs are spaces, not tabs
+set tabstop=2         " An indentation every four columns
+set softtabstop=2     " Let backspace delete indent
+set nojoinspaces      " Prevents inserting two spaces after punctuation on a join (J)
+set splitright        " Puts new vsplit windows to the right of the current
+set splitbelow        " Puts new split windows to the bottom of the current
+set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> call StripTrailingWhitespace()
@@ -270,7 +270,7 @@ nmap <leader>f9 :set foldlevel=9<CR>
 " Most prefer to toggle search highlighting rather than clear the current
 " search results. To clear search highlighting rather than toggle it on
 " and off, uncomment next line
-"   nmap <silent> <leader>/ :nohlsearch<CR>
+" nmap <silent> <leader>/ :nohlsearch<CR>
 " and comment the next one
 nmap <silent> <leader>/ :set invhlsearch<CR>
 
