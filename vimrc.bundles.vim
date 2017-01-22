@@ -81,6 +81,8 @@
       Plug 'vim-scripts/sessionman.vim' " Work with Vim sessions by keeping them in the dedicated location
       Plug 'rhysd/conflict-marker.vim' " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
       Plug 'tacahiroy/ctrlp-funky' " A simple function navigator for ctrlp.vim
+      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+      Plug 'junegunn/fzf.vim'
     endif
   " }
 
