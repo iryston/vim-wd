@@ -121,12 +121,13 @@ if has('statusline')
   set laststatus=2
 
   " Broken down into easily includeable segments
-  set statusline=%<%f\                     " Filename
-  set statusline+=%w%h%m%r                 " Options
-  set statusline+=%{fugitive#statusline()} " Git Hotness
-  set statusline+=\ [%{&ff}/%Y]            " Filetype
-  set statusline+=\ [%{getcwd()}]          " Current dir
-  set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+  set statusline=%<%f\                                         " Filename
+  set statusline+=%w%h%m%r                                     " Options
+  set statusline+=%{fugitive#statusline()}                     " Git Hotness
+  set statusline+=\ [%{&ff}/%Y]                                " Filetype
+  set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}] " Encoding
+  set statusline+=\ [%{getcwd()}]                              " Current dir
+  set statusline+=%=%-14.(%l,%c%V%)\ %p%%                      " Right aligned file nav info
 endif
 
 set backspace=indent,eol,start  " Intuitive backspacing
@@ -592,27 +593,6 @@ endif
 " vim-commentary {
 map  gc  <Plug>Commentary
 nmap gcc <Plug>CommentaryLine
-" }
-
-" vim-airline {
-" Set configuration options for the statusline plugin vim-airline.
-" Use the powerline theme and optionally enable powerline symbols.
-" To use the symbols , , , , , , and .in the statusline
-" segments uncomment the following line:
-" let g:airline_powerline_fonts=1
-" If the previous symbols do not render for you then install a
-" powerline enabled font.
-
-" See `:echo g:airline_theme_map` for some more choices
-" Default in terminal vim is 'dark'
-if isdirectory(expand("~/.vim/bundle/vim-airline/"))
-  let g:airline_theme = 'gruvbox'
-  if !exists('g:airline_powerline_fonts')
-    " Use the default set of separators with a few customizations
-    let g:airline_left_sep='›'  " Slightly fancier than '>'
-    let g:airline_right_sep='‹' " Slightly fancier than '<'
-  endif
-endif
 " }
 
 " }

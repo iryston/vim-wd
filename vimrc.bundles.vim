@@ -62,7 +62,6 @@
 
   " General {
     if count(g:bundle_groups, 'general')
-      Plug 'vim-airline/vim-airline' " Lean & mean status/tabline for vim that's light as air
       Plug 'bling/vim-bufferline' " Super simple vim plugin to show the list of buffers in the command bar
       Plug 'ctrlpvim/ctrlp.vim' " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
       Plug 'scrooloose/nerdtree', { 'on': '<Plug>NERDTreeTabsToggle' } " A tree explorer plugin for vim
