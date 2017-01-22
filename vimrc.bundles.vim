@@ -216,6 +216,7 @@
   " Misc {
     if count(g:bundle_groups, 'misc')
       "Plug 'rodjek/vim-puppet'
+      Plug 'chrisbra/unicode.vim', { 'on': ['<plug>(UnicodeComplete)', '<plug>(UnicodeGA)', 'UnicodeTable'] }
       Plug 'Chiel92/vim-autoformat'
       Plug 'evanmiller/nginx-vim-syntax'
       Plug 'freitass/todo.txt-vim'
