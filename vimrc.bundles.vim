@@ -1,22 +1,43 @@
 " vim: set sw=2 ts=2 sts=2 et tw=0 foldmarker={,} foldlevel=0 foldmethod=marker
 
+" ############################################################################
 " Environment {
+" ############################################################################
 
+  " --------------------------------------------------------------------------
   " Identify platform {
+  " --------------------------------------------------------------------------
     silent function! OSX()
       return has('macunix')
     endfunction
     silent function! LINUX()
       return has('unix') && !has('macunix') && !has('win32unix')
     endfunction
+    silent function! WINDOWS()
+      return  (has('win32') || has('win64'))
+    endfunction
   " }
 
+  " --------------------------------------------------------------------------
   " Basics {
-    set nocompatible " Must be first line
-    set background=dark " Assume a dark background
+  " --------------------------------------------------------------------------
+    set nocompatible        " Must be first line
+    set background=dark     " Assume a dark background
   " }
 
+  " --------------------------------------------------------------------------
+  " Windows Compatible {
+  " --------------------------------------------------------------------------
+    " On Windows, also use '.vim' instead of 'vimfiles';
+    " This makes synchronization across (heterogeneous) systems easier.
+    if WINDOWS()
+      set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME
+    endif
+  " }
+
+  " --------------------------------------------------------------------------
   " Arrow Key Fix {
+  " --------------------------------------------------------------------------
     if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
       inoremap <silent> <C-[>OC <RIGHT>
     endif
@@ -24,9 +45,13 @@
 
 " }
 
+" ############################################################################
 " Bundles {
+" ############################################################################
 
+  " --------------------------------------------------------------------------
   " Automatic installation {
+  " --------------------------------------------------------------------------
     if empty(glob('~/.vim/autoload/plug.vim'))
       silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -38,10 +63,19 @@
 
   call plug#begin(bundle)
 
+  " --------------------------------------------------------------------------
   " Dependences {
-    Plug 'MarcWeber/vim-addon-mw-utils' " Various utils such as caching interpreted contents of files
-    Plug 'tomtom/tlib_vim' " This library provides some utility functions
-    Plug 'godlygeek/csapprox' " Make gvim-only colorschemes work transparently in terminal vim
+  " --------------------------------------------------------------------------
+    " Make gvim-only colorschemes work transparently in terminal vim
+    Plug 'godlygeek/csapprox'
+    " Various utils such as caching interpreted contents of files
+    Plug 'MarcWeber/vim-addon-mw-utils'
+    " Qargs utility command, for populating the argument list from the files in the quickfix list
+    Plug 'nelstrom/vim-qargs'
+    " This library provides some utility functions
+    Plug 'tomtom/tlib_vim'
+    " Enable repeating supported plugin maps with .
+    Plug 'tpope/vim-repeat'
     if executable('ag')
       Plug 'mileszs/ack.vim'
       let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
@@ -51,73 +85,119 @@
     elseif executable('ack')
       Plug 'mileszs/ack.vim'
     endif
-    Plug 'tpope/vim-repeat' " Enable repeating supported plugin maps with .
-    Plug 'nelstrom/vim-qargs' " Qargs utility command, for populating the argument list from the files in the quickfix list
   " }
 
+  " --------------------------------------------------------------------------
   " Available bundle groups:
-  " ['general', 'colorschemes', 'writing', 'programming', 'codecompletion', 'clojure', 'go', 'haskell', 'html', 'javascript', 'php', 'python', 'ruby', 'scala', 'misc']
+  " --------------------------------------------------------------------------
+  " [ 'general'
+  " \, 'clojure'
+  " \, 'codecompletion'
+  " \, 'colorschemes'
+  " \, 'go'
+  " \, 'haskell'
+  " \, 'html'
+  " \, 'javascript'
+  " \, 'misc'
+  " \, 'php'
+  " \, 'programming'
+  " \, 'python'
+  " \, 'ruby'
+  " \, 'rust'
+  " \, 'tmux'
+  " \, 'scala'
+  " \, 'writing'
+  " \ ]
 
-    let g:bundle_groups=['general', 'colorschemes', 'writing', 'programming', 'codecompletion', 'html', 'javascript', 'php', 'python', 'ruby', 'misc']
+    let g:bundle_groups=[ 'general'
+          \, 'codecompletion'
+          \, 'colorschemes'
+          \, 'html'
+          \, 'javascript'
+          \, 'misc'
+          \, 'php'
+          \, 'programming'
+          \, 'python'
+          \, 'ruby'
+          \, 'tmux'
+          \, 'writing'
+          \ ]
 
+  " --------------------------------------------------------------------------
   " General {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'general')
-      Plug 'bling/vim-bufferline' " Super simple vim plugin to show the list of buffers in the command bar
-      Plug 'ctrlpvim/ctrlp.vim' " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
-      Plug 'scrooloose/nerdtree', { 'on': '<Plug>NERDTreeTabsToggle' } " A tree explorer plugin for vim
-      Plug 'jistr/vim-nerdtree-tabs' " NERDTree and tabs together in Vim, painlessly
-      "Plug 'lyokha/vim-xkbswitch'
-      Plug 'vim-scripts/matchit.zip' " Extended % matching for HTML, LaTeX, and many other languages
-      Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " Visualize undo-tree
-      Plug 'mhinz/vim-signify' " Signs to indicate added, modified and removed lines based on data of an underlying version control system
-      Plug 'nathanaelkane/vim-indent-guides' " Visually display indent levels in Vim
-      Plug 'osyo-manga/vim-over' " Highlights the {pattern} parameter from |:substitute| {pattern}
-      Plug 'terryma/vim-multiple-cursors' " Multiple selections for Vim
-      Plug 'tpope/vim-abolish' " Abbreviation, substitution and coercion
-      Plug 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the most
-      Plug 'tpope/vim-surround' " Delete, change and add such surroundings in pairs
-      Plug 'vim-scripts/restore_view.vim' " A plugin for automatically restoring file's cursor position and folding
-      Plug 'vim-scripts/sessionman.vim' " Work with Vim sessions by keeping them in the dedicated location
-      Plug 'rhysd/conflict-marker.vim' " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
-      Plug 'tacahiroy/ctrlp-funky' " A simple function navigator for ctrlp.vim
+      " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
+      Plug 'ctrlpvim/ctrlp.vim'
+      " A light and configurable statusline/tabline for Vim
+      Plug 'itchyny/lightline.vim'
       Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
       Plug 'junegunn/fzf.vim'
+      " A set of mappings for enhancing in-buffer search experience in Vim
+      Plug 'junegunn/vim-slash'
+      " Opens the file manager or terminal at the directory of the current file in Vim.
+      Plug 'justinmk/vim-gtfo'
+      " Visualize undo-tree
+      Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+      " Signs to indicate changes in lines based on data of an underlying VCS
+      Plug 'mhinz/vim-signify'
+      " Visually display indent levels in Vim
+      Plug 'nathanaelkane/vim-indent-guides'
+      " Highlights the {pattern} parameter from |:substitute| {pattern}
+      Plug 'osyo-manga/vim-over'
+      " Highlight, Jump and Resolve Conflict Markers Quickly in Vim
+      Plug 'rhysd/conflict-marker.vim'
+      " A tree explorer plugin for vim
+      Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
+      " A simple function navigator for ctrlp.vim
+      Plug 'tacahiroy/ctrlp-funky'
+      " Abbreviation, substitution and coercion
+      Plug 'tpope/vim-abolish'
+      " Vim sugar for the UNIX shell commands that need it the most
+      Plug 'tpope/vim-eunuch'
+      " Delete, change and add such surroundings in pairs
+      Plug 'tpope/vim-surround'
+      " Extended % matching for HTML, LaTeX, and many other languages
+      Plug 'vim-scripts/matchit.zip'
+      " A plugin for automatically restoring file's cursor position and folding
+      Plug 'vim-scripts/restore_view.vim'
+      " Work with Vim sessions by keeping them in the dedicated location
+      Plug 'vim-scripts/sessionman.vim'
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " Color Schemes {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'colorschemes')
       Plug 'morhetz/gruvbox'
     endif
   " }
 
-  " Writing {
-    if count(g:bundle_groups, 'writing')
-      Plug 'reedes/vim-litecorrect'
-      Plug 'reedes/vim-textobj-sentence'
-      Plug 'reedes/vim-textobj-quote'
-      Plug 'reedes/vim-wordy'
-    endif
-  " }
-
+  " --------------------------------------------------------------------------
   " General Programming {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'programming')
-      " Pick one of the checksyntax, jslint, or syntastic
+      Plug 'AndrewRadev/linediff.vim' " Perform diffs on blocks of code
+      Plug 'AndrewRadev/splitjoin.vim' " Simplify the transition between multiline and single-line code
+      Plug 'editorconfig/editorconfig-vim'
       Plug 'godlygeek/tabular'
+      Plug 'junegunn/gv.vim', { 'on': 'GV' }
       Plug 'mattn/gist-vim'
       Plug 'mattn/webapi-vim'
-      Plug 'scrooloose/syntastic'
-      Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' } " Comment stuff out
+      Plug 'rhysd/committia.vim'
+      Plug 'tpope/vim-commentary', { 'on': [ '<Plug>Commentary', '<Plug>CommentaryLine' ] } " Comment stuff out
       Plug 'tpope/vim-fugitive'
-      Plug 'junegunn/gv.vim'
+      Plug 'vim-syntastic/syntastic', { 'on': [ 'SyntasticCheck', 'SyntasticInfo', 'SyntasticToggleMode' ] }
       if executable('ctags')
         Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
       endif
-      Plug 'editorconfig/editorconfig-vim'
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " Code completion {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'codecompletion')
       Plug 'garbas/vim-snipmate'
       Plug 'honza/vim-snippets'
@@ -125,26 +205,31 @@
       if filereadable(expand("~/.vim/bundle/vim-snippets/snippets/support_functions.vim"))
         source ~/.vim/bundle/vim-snippets/snippets/support_functions.vim
       endif
-      Plug 'mattn/emmet-vim', { 'for': 'html' }
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " Clojure {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'clojure')
+      Plug 'guns/vim-clojure-highlight'
+      Plug 'guns/vim-clojure-static'
       Plug 'kovisoft/paredit', { 'for': 'clojure' }
       Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-      Plug 'guns/vim-clojure-static'
-      Plug 'guns/vim-clojure-highlight'
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " Go Lang {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'go')
       Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " Haskell {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'haskell')
       Plug 'adinapoli/cumino'
       Plug 'bitc/vim-hdevtools'
@@ -159,16 +244,22 @@
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " HTML {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'html')
-      Plug 'ap/vim-css-color'
+      Plug 'ap/vim-css-color', { 'for': ['css', 'html', 'less', 'sass', 'scss', 'stylus'] }
+      Plug 'digitaltoad/vim-pug', { 'for': ['html', 'pug'] }
       Plug 'hail2u/vim-css3-syntax'
-      Plug 'tpope/vim-haml'
       Plug 'kewah/vim-stylefmt'
+      Plug 'mattn/emmet-vim', { 'for': ['css', 'html', 'htmldjango', 'jinja', 'xsl'] }
+      Plug 'tpope/vim-haml'
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " Javascript {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'javascript')
       Plug 'briancollins/vim-jst'
       Plug 'elzr/vim-json'
@@ -179,7 +270,9 @@
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " PHP {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'php')
       Plug 'arnaud-lb/vim-php-namespace'
       Plug 'lumiliet/vim-twig'
@@ -187,18 +280,20 @@
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " Python {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'python')
-      " Pick either python-mode or pyflakes & pydoc
-      "Plug 'klen/python-mode'
+      Plug 'Glench/Vim-Jinja2-Syntax'
       Plug 'pythoncomplete'
       Plug 'python_match.vim'
       Plug 'yssource/python.vim'
-      Plug 'Glench/Vim-Jinja2-Syntax'
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " Scala {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'scala')
       Plug 'derekwyatt/vim-sbt', { 'for': ['scala', 'sbt.scala'] }
       Plug 'derekwyatt/vim-scala', { 'for': ['scala', 'sbt.scala'] }
@@ -206,7 +301,9 @@
     endif
   " }
 
+  " --------------------------------------------------------------------------
   " Ruby {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'ruby')
       Plug 'tpope/vim-rails', { 'for': [] }
       let g:rubycomplete_buffer_loading = 1
@@ -215,18 +312,46 @@
     endif
   " }
 
+  " --------------------------------------------------------------------------
+  " Rust {
+  " --------------------------------------------------------------------------
+    if count(g:bundle_groups, 'rust')
+      Plug 'rust-lang/rust.vim'
+    endif
+  " }
+
+  " --------------------------------------------------------------------------
+  " Tmux {
+  " --------------------------------------------------------------------------
+    if count(g:bundle_groups, 'tmux')
+      Plug 'keith/tmux.vim'
+      Plug 'tpope/vim-tbone'
+    endif
+  " }
+
+  " --------------------------------------------------------------------------
+  " Writing {
+  " --------------------------------------------------------------------------
+    if count(g:bundle_groups, 'writing')
+      Plug 'reedes/vim-litecorrect'
+      Plug 'reedes/vim-textobj-quote'
+      Plug 'reedes/vim-textobj-sentence'
+      Plug 'reedes/vim-wordy'
+    endif
+  " }
+
+  " --------------------------------------------------------------------------
   " Misc {
+  " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'misc')
-      "Plug 'rodjek/vim-puppet'
-      Plug 'chrisbra/unicode.vim'
       Plug 'Chiel92/vim-autoformat'
+      Plug 'chrisbra/unicode.vim'
       Plug 'evanmiller/nginx-vim-syntax'
       Plug 'freitass/todo.txt-vim'
+      Plug 'honza/dockerfile.vim'
       Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-      Plug 'keith/tmux.vim'
       Plug 'mhinz/vim-startify'
       Plug 'quentindecock/vim-cucumber-align-pipes'
-      Plug 'rust-lang/rust.vim'
       Plug 'szw/vim-g'
       Plug 'tpope/vim-cucumber'
       Plug 'tpope/vim-markdown'
