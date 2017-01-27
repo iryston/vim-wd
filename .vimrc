@@ -1396,6 +1396,7 @@ if has('gui_running')
     set noimd
     set imi=1
     set ims=-1
+    set fullscreen
   elseif WINDOWS() && has("gui_running")
     set guifont=Input_Mono:h10
           \ ,Andale_Mono:h10
