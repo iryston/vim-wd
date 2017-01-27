@@ -430,8 +430,8 @@ augroup END
 
 " Intuitive backspacing
 set backspace=indent,eol,start
-" No extra spaces between rows
-set linespace=0
+" Adjust extra spaces between rows
+set linespace=2
 " Line numbers on
 set nu
 " Don't show matching brackets/parenthesis
