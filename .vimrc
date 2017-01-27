@@ -1378,31 +1378,16 @@ if has('gui_running')
   set lines=100 columns=200
   " set fu
   if LINUX() && has("gui_running")
-    set guifont=Input\ Mono\ Regular\ 11
-          \ ,Cousine\ Regular\ 13
-          \ ,Monospace\ Regular\ 11
-          \ ,Ubuntu\ Mono\ Regular\ 13
-          \ ,Andale\ Mono\ Regular\ 12
-          \ ,Menlo\ Regular\ 11
-          \ ,Consolas\ Regular\ 12
-          \ ,Courier\ New\ Regular\ 14
+    set guifont=Input\ Mono\ Regular\ 11,Cousine\ Regular\ 13,Monospace\ Regular\ 11,Ubuntu\ Mono\ Regular\ 13,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
   elseif OSX() && has("gui_running")
-    set guifont=Input\ Mono\ Regular:h14
-          \ ,Andale\ Mono\ Regular:h16
-          \ ,Menlo\ Regular:h15
-          \ ,Consolas\ Regular:h16
-          \ ,Courier\ New\ Regular:h18
+    set guifont=Input\ Mono\ Regular:h14,Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
     " For MacVim
     set noimd
     set imi=1
     set ims=-1
     set fullscreen
   elseif WINDOWS() && has("gui_running")
-    set guifont=Input_Mono:h10
-          \ ,Andale_Mono:h10
-          \ ,Menlo:h10
-          \ ,Consolas:h10
-          \ ,Courier_New:h10
+    set guifont=Input_Mono:h10,Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
   endif
   let g:gruvbox_contrast_dark="soft"
   let g:gruvbox_contrast_light="soft"
