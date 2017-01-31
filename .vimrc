@@ -19,17 +19,18 @@ endif
 " Avoid unnecessary hit-enter prompts
 set shortmess=atI
 set langmenu=en
-set helplang=en,ru
+set helplang=en
 set encoding=utf-8
 scriptencoding utf-8
 " Autoset order for file character encodings
 set fileencodings=utf-8,cp1251,koi8-r,cp866
 " For Russian users
 set keymap=russian-jcukenwin
-set iskeyword=@,48-57,_,168,184,192-255
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;
       \`qwertyuiop[]asdfghjkl\\;
       \'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
+setlocal spell spelllang=ru_yo,en_us
+set iskeyword=@,48-57,_,168,184,192-255
 set iminsert=0
 set imsearch=0
 
@@ -1381,10 +1382,6 @@ if has('gui_running')
     set guifont=Input\ Mono\ Regular\ 11,Cousine\ Regular\ 13,Monospace\ Regular\ 11,Ubuntu\ Mono\ Regular\ 13,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
   elseif OSX() && has("gui_running")
     set guifont=Input\ Mono\ Regular:h14,Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
-    " For MacVim
-    set noimd
-    set imi=1
-    set ims=-1
     set fullscreen
   elseif WINDOWS() && has("gui_running")
     set guifont=Input_Mono:h10,Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
