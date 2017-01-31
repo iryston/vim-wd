@@ -21,8 +21,10 @@
   " --------------------------------------------------------------------------
   " Basics {
   " --------------------------------------------------------------------------
-    set nocompatible        " Must be first line
-    set background=dark     " Assume a dark background
+    " Must be first line
+    set nocompatible
+    " Assume a dark background
+    set background=dark
   " }
 
   " --------------------------------------------------------------------------
@@ -38,7 +40,7 @@
   " --------------------------------------------------------------------------
   " Arrow Key Fix {
   " --------------------------------------------------------------------------
-    if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
+    if &term[:4] == 'xterm' || &term[:5] == 'screen' || &term[:3] == 'rxvt'
       inoremap <silent> <C-[>OC <RIGHT>
     endif
   " }
@@ -80,7 +82,7 @@
       Plug 'mileszs/ack.vim'
       let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
     elseif executable('ack-grep')
-      let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+      let g:ackprg='ack-grep -H --nocolor --nogroup --column'
       Plug 'mileszs/ack.vim'
     elseif executable('ack')
       Plug 'mileszs/ack.vim'
@@ -202,7 +204,7 @@
       Plug 'garbas/vim-snipmate'
       Plug 'honza/vim-snippets'
       " Source support_function.vim to support vim-snippets.
-      if filereadable(expand("~/.vim/bundle/vim-snippets/snippets/support_functions.vim"))
+      if filereadable(expand('~/.vim/bundle/vim-snippets/snippets/support_functions.vim'))
         source ~/.vim/bundle/vim-snippets/snippets/support_functions.vim
       endif
     endif
