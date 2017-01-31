@@ -554,9 +554,9 @@ noremap k gk
 " Same for 0, home, end, etc
 " ----------------------------------------------------------------------------
 function! WrapRelativeMotion(key, ...)
-  let vis_sel=""
+  let vis_sel=''
   if a:0
-    let vis_sel="gv"
+    let vis_sel='gv'
   endif
   if &wrap
     execute "normal!" vis_sel . "g" . a:key
@@ -933,7 +933,7 @@ inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype
 " ----------------------------------------------------------------------------
 " EditorConfig Vim Plugin {
 " ----------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/bundle/editorconfig-vim"))
+if isdirectory(expand('~/.vim/bundle/editorconfig-vim'))
   let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 endif
 " }
@@ -941,7 +941,7 @@ endif
 " ----------------------------------------------------------------------------
 " PIV {
 " ----------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/bundle/PIV"))
+if isdirectory(expand('~/.vim/bundle/PIV'))
   let g:DisableAutoPHPFolding = 1
   let g:PIVAutoClose = 0
 endif
@@ -964,7 +964,7 @@ endfunction
 " ----------------------------------------------------------------------------
 " Misc {
 " ----------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/bundle/matchit.zip"))
+if isdirectory(expand('~/.vim/bundle/matchit.zip'))
   let b:match_ignorecase = 1
 endif
 " }
@@ -1058,7 +1058,7 @@ let g:snips_author = 'Igor R. Plity <iryston@iryston.net>'
 " Startify {
 " ----------------------------------------------------------------------------
 let g:startify_bookmarks = [
-      \ $HOME . "/.vimrc"
+      \ $HOME . '/.vimrc'
       \ ]
 " Disable random quotes header
 let g:startify_custom_header = []
@@ -1072,7 +1072,7 @@ let g:ctrlp_reuse_window = 'startify'
 " ----------------------------------------------------------------------------
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 2
+"let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
@@ -1102,7 +1102,7 @@ highlight link SyntasticStyleWarningSign SignColumn
 " ----------------------------------------------------------------------------
 " NerdTree {
 " ----------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/bundle/nerdtree"))
+if isdirectory(expand('~/.vim/bundle/nerdtree'))
   nnoremap <F9> :NERDTreeToggle<cr>
 
   augroup nerd_loader
@@ -1129,7 +1129,7 @@ endif
 " ----------------------------------------------------------------------------
 " Tabularize {
 " ----------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/bundle/tabular"))
+if isdirectory(expand('~/.vim/bundle/tabular'))
   nmap <Leader>a& :Tabularize /&<CR>
   vmap <Leader>a& :Tabularize /&<CR>
   nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
@@ -1153,7 +1153,7 @@ endif
 " Session List {
 " ----------------------------------------------------------------------------
 set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
-if isdirectory(expand("~/.vim/bundle/sessionman.vim/"))
+if isdirectory(expand('~/.vim/bundle/sessionman.vim/'))
   nmap <leader>sl :SessionList<CR>
   nmap <leader>ss :SessionSave<CR>
   nmap <leader>sc :SessionClose<CR>
@@ -1175,7 +1175,7 @@ if !has('python')
   let g:pymode = 0
 endif
 
-if isdirectory(expand("~/.vim/bundle/python-mode"))
+if isdirectory(expand('~/.vim/bundle/python-mode'))
   let g:pymode_lint_checkers = ['pyflakes']
   let g:pymode_trim_whitespaces = 0
   let g:pymode_options = 0
@@ -1186,7 +1186,7 @@ endif
 " ----------------------------------------------------------------------------
 " ctrlp {
 " ----------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/bundle/ctrlp.vim/"))
+if isdirectory(expand('~/.vim/bundle/ctrlp.vim/'))
   let g:ctrlp_working_path_mode = 'ra'
   nnoremap <silent> <D-t> :CtrlP<CR>
   nnoremap <silent> <D-r> :CtrlPMRU<CR>
@@ -1218,7 +1218,7 @@ endif
 " TagBar {
 " ----------------------------------------------------------------------------
 if v:version >= 703
-  if isdirectory(expand("~/.vim/bundle/tagbar/"))
+  if isdirectory(expand('~/.vim/bundle/tagbar/'))
     inoremap <F8> <esc>:TagbarToggle<cr>
     nnoremap <F8> :TagbarToggle<cr>
     let g:tagbar_sort = 0
@@ -1229,7 +1229,7 @@ endif
 " ----------------------------------------------------------------------------
 " Fugitive {
 " ----------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
+if isdirectory(expand('~/.vim/bundle/vim-fugitive/'))
   nnoremap <silent> <leader>gs :Gstatus<CR>
   nnoremap <silent> <leader>gd :Gdiff<CR>
   nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -1265,14 +1265,14 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 " $ `cabal install ghcmod` if missing and ensure
 " ~/.cabal/bin is in your $PATH.
 " ----------------------------------------------------------------------------
-if !executable("ghcmod")
+if !executable('ghcmod')
   autocmd BufWritePost *.hs GhcModCheckAndLintAsync
 endif
 
 " ----------------------------------------------------------------------------
 " UndoTree {
 " ----------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/bundle/undotree/"))
+if isdirectory(expand('~/.vim/bundle/undotree/'))
   nnoremap <Leader>u :UndotreeToggle<CR>
   " If undotree is opened, it is likely one wants to interact with it.
   let g:undotree_SetFocusWhenToggle=1
@@ -1283,7 +1283,7 @@ endif
 " ----------------------------------------------------------------------------
 " indent_guides {
 " ----------------------------------------------------------------------------
-if isdirectory(expand("~/.vim/bundle/vim-indent-guides/"))
+if isdirectory(expand('~/.vim/bundle/vim-indent-guides/'))
   let g:indent_guides_start_level = 2
   let g:indent_guides_guide_size = 1
   let g:indent_guides_enable_on_vim_startup = 1
@@ -1386,8 +1386,8 @@ if has('gui_running')
   elseif WINDOWS() && has("gui_running")
     set guifont=Input_Mono:h10,Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
   endif
-  let g:gruvbox_contrast_dark="soft"
-  let g:gruvbox_contrast_light="soft"
+  let g:gruvbox_contrast_dark='soft'
+  let g:gruvbox_contrast_light='soft'
   set background=dark
   colorscheme gruvbox
 else
@@ -1396,11 +1396,11 @@ else
     "let &t_SI = "\<Esc>]12;Blue\x7"
     "let &t_EI = "\<Esc>]12;NavyBlue\x7"
   endif
-  if has("nvim")
+  if has('nvim')
     set termguicolors
   endif
-  let g:gruvbox_contrast_dark="soft"
-  let g:gruvbox_contrast_light="soft"
+  let g:gruvbox_contrast_dark='soft'
+  let g:gruvbox_contrast_light='soft'
   set background=dark
   colorscheme gruvbox
 endif
@@ -1497,11 +1497,11 @@ function! InitializeDirectories()
       endif
     endif
     if !isdirectory(directory)
-      echo "Warning: Unable to create backup directory: " . directory
-      echo "Try: mkdir -p " . directory
+      echo 'Warning: Unable to create backup directory: ' . directory
+      echo 'Try: mkdir -p ' . directory
     else
       let directory = substitute(directory, " ", "\\\\ ", "g")
-      exec "set " . settingname . "=" . directory
+      exec 'set ' . settingname . '=' . directory
     endif
   endfor
 endfunction
@@ -1604,7 +1604,7 @@ function! s:save_macro(name, file)
   let content = eval('@'.a:name)
   if !empty(content)
     call writefile(split(content, "\n"), a:file)
-    echom len(content) . " bytes save to ". a:file
+    echom len(content) . ' bytes save to '. a:file
   endif
 endfunction
 command! -nargs=* SaveMacro call <SID>save_macro(<f-args>)
