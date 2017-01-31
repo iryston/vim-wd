@@ -1371,13 +1371,23 @@ let g:splitjoin_join_mapping = ''
 " GVIM- (here instead of .gvimrc)
 " ----------------------------------------------------------------------------
 if has('gui_running')
-" Remove the toolbar
+  "No menu
+  set guioptions-=m
+  "No toolbar
   set guioptions-=T
-" Remove the scrollbar
+  "No scrollbar on the right
   set guioptions-=r
+  "No scrollbar on the right when there are splits
+  set guioptions-=R
+  "No scrollbar on the left
+  set guioptions-=l
+  "No scrollbar on the left when there are splits
+  set guioptions-=L
 " Maximize window on start
-  set lines=100 columns=200
-  " set fu
+  set lines=999 columns=999
+  if OSX() && has("gui_running")
+    set fullscreen
+  endif
   if LINUX() && has("gui_running")
     set guifont=Input\ Mono\ Regular\ 11,Cousine\ Regular\ 13,Monospace\ Regular\ 11,Ubuntu\ Mono\ Regular\ 13,Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
   elseif OSX() && has("gui_running")
