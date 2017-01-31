@@ -1390,7 +1390,7 @@ if has('gui_running')
   endif
   " Set fonts
   if LINUX() && has("gui_running")
-    set guifont=Roboto\ Mono\ Light\ 15,InputMono\ Light\ 14,Consolas\ 17,Source\ Code\ Pro\ 15,Cousine\ 15,Hack\ Regular\ 15,Menlo\ Regular\ 15,Ubuntu\ Mono:18,Courier\ New\ 16
+    set guifont=Roboto\ Mono\ Light\ 15,Input\ Mono\ Light\ 14,Consolas\ 17,Source\ Code\ Pro\ 15,Cousine\ 15,Hack\ 15,Ubuntu\ Mono\ 18,Menlo\ Regular\ 15,Courier\ New\ 16
   elseif OSX() && has("gui_running")
     set guifont=Roboto\ Mono\ Light:h15,InputMono\ Light:h14,Consolas:h17,Source\ Code\ Pro:h15,Cousine:h15,Hack\ Regular:h15,Menlo\ Regular:h15,Ubuntu\ Mono:18,Courier\ New:h16
   elseif WINDOWS() && has("gui_running")
