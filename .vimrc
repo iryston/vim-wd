@@ -182,6 +182,15 @@ highlight clear CursorLineNr
 " Remove highlight color from current line number
 let g:CSApprox_hook_post = ['hi clear SignColumn']
 
+if has('cmdline_info')
+" Show the ruler
+  set ruler
+" A ruler on steroids
+  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
+" Show partial commands in status line and selected characters/lines in visual mode
+  set showcmd
+endif
+
 " Show current mode
 set showmode
 
