@@ -131,8 +131,7 @@
     if count(g:bundle_groups, 'general')
       " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
       Plug 'ctrlpvim/ctrlp.vim'
-      " A light and configurable statusline/tabline for Vim
-      Plug 'itchyny/lightline.vim'
+      " A command-line fuzzy finder written in Go
       Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
       Plug 'junegunn/fzf.vim'
       " A set of mappings for enhancing in-buffer search experience in Vim

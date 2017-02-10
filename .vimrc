@@ -68,8 +68,8 @@ endif
 " http://superuser.com/questions/195794/gnu-screen-shift-tab-issue
 set t_kB=[Z
 
-" Most prefer to automatically switch to the current file directory when
-" a new buffer is opened; to prevent this behavior, comment next line
+" Automatically switch to the current buffer directory;
+" To prevent this behavior, comment next line
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 " Always switch to the current file directory
 "set complete=.,w,b,u,U
@@ -182,83 +182,105 @@ highlight clear CursorLineNr
 " Remove highlight color from current line number
 let g:CSApprox_hook_post = ['hi clear SignColumn']
 
-if has('cmdline_info')
-" Show the ruler
-  set ruler
-" A ruler on steroids
-  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
-" Show partial commands in status line and selected characters/lines in visual mode
-  set showcmd
-endif
+" Show current mode
+set showmode
 
+" Always show the statusline
 set laststatus=2
 
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'],
-      \              ['syntastic'], ['trailingspace'], ['indentmix'] ],
-      \   'right': [ [ 'bufinfo', 'lineinfo', 'percent' ],
-      \              [ 'codeblock', 'fileformat', 'fileencoding', 'filetype', 'filesize' ] ]
-      \ },
-      \ 'component': {
-      \       'lineinfo': '%c:%l/%L',
-      \      'indentmix': '%#error#%{LightlineTabWarning()}',
-      \  'trailingspace': '%#error#%{LightlineTrailingSpaceWarning()}',
-      \ },
-      \ 'component_function': {
-      \           'mode': 'LightlineMode',
-      \        'bufinfo': 'LightlineBufInfo',
-      \       'filename': 'LightlineFilename',
-      \       'filesize': 'LightlineFilesize',
-      \       'filetype': 'LightlineFiletype',
-      \       'fugitive': 'LightlineFugitive',
-      \      'codeblock': 'LightlineCurrentblock',
-      \      'ctrlpmark': 'CtrlPMark',
-      \     'fileformat': 'LightlineFileformat',
-      \   'fileencoding': 'LightlineFileencoding',
-      \ },
-      \ 'component_expand': {
-      \      'syntastic': 'SyntasticStatuslineFlag',
-      \ },
-      \ 'component_type': {
-      \      'indentmix': 'raw',
-      \      'syntastic': 'error',
-      \  'trailingspace': 'raw',
-      \ },
-      \ 'subseparator': { 'left': '|', 'right': '|' }
-      \ }
+" Statusline setup
+" Clear the statusline for when vimrc is reloaded
+set statusline=
+" Tail of the filename
+set statusline+=%(\ %f\ %)
 
-function! LightlineBufInfo()
+" Read only flag
+set statusline+=%#ModeMsg#
+set statusline+=%r
+set statusline+=%*
+
+" Modified flag
+set statusline+=%#WarningMsg#
+set statusline+=%m
+set statusline+=%*
+
+" Preview flag
+set statusline+=%#WarningMsg#
+set statusline+=%w
+set statusline+=%*
+
+set statusline+=%#Identifier#
+set statusline+=%{StatuslineBufInfo()}
+set statusline+=(%{StatuslineFileSize()})
+set statusline+=%*
+
+" Cut long statusline
+set statusline+=%<
+
+set statusline+=%#SpecialKey#
+" StatuslineWorkingDirectory
+set statusline+=%{StatuslineWorkingDirectory()}
+set statusline+=\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
+set statusline+=%{StatuslineFileDate()}
+set statusline+=%{StatuslineFileInfo()}
+set statusline+=%*
+
+" Display a warning if &et is wrong, or we have mixed-indenting
+set statusline+=%#Error#
+set statusline+=%{StatuslineTabWarning()}
+set statusline+=%*
+
+" Display a warning of trailing space
+set statusline+=%#Error#
+set statusline+=%{StatuslineTrailingSpaceWarning()}
+set statusline+=%*
+
+" Syntastic plugin warnings
+set statusline+=%#WarningMsg#
+set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
+set statusline+=%*
+
+" Display a warning if &paste is set
+set statusline+=%#ModeMsg#
+set statusline+=%{&paste?'[paste]':''}
+set statusline+=%*
+
+set statusline+=%##
+
+" Left/right separator
+set statusline+=%=
+
+set statusline+=%*
+set statusline+=%#SpecialKey#
+set statusline+=%{StatuslineCurrentHighlight()}
+set statusline+=%*
+" set statusline+=%#Identifier#
+set statusline+=%-.(\ %c,%l/%L\ %p%%%)
+" set statusline+=%*
+
+function! StatuslineWorkingDirectory()
+  return winwidth(0) > 70 ? ' [' . getcwd() . ']' : ''
+endfunction
+
+function! StatuslineFileDate()
+  return winwidth(0) > 70 ? strftime('%Y/%m/%d-%H:%M', getftime(bufname('%'))) . ' ' : ''
+endfunction
+
+" Show filetype, fileformat and encoding
+function! StatuslineFileInfo()
+  return winwidth(0) > 70 ? '[' . (&filetype !=# '' ? &filetype : 'no ft')
+        \. '/' . &fileformat
+        \. '/' . (&fenc !=# '' ? &fenc : &enc).(&bomb ? ',BOM' : '') . ']' : ''
+endfunction
+
+function! StatuslineBufInfo()
   let last_buf_nr = len(filter(range(1,bufnr('$')),'buflisted(v:val)'))
   let cur_buf_nr = bufnr('%')
-  return 'B#' . cur_buf_nr . '/' . last_buf_nr
-endfunction
-
-function! LightlineModified()
-  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightlineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-function! LightlineFilename()
-  let fname = expand('%:t')
-  let nr = bufnr('')
-  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+  return ' B#' . cur_buf_nr . '/' . last_buf_nr
 endfunction
 
 " Find out current buffer's size and output it.
-function!  LightlineFilesize()
+function! StatuslineFileSize()
   let bytes = getfsize(expand('%:p'))
   if (bytes >= 1024)
     let kbytes = bytes / 1024
@@ -272,162 +294,73 @@ function!  LightlineFilesize()
   endif
 
   if (exists('mbytes'))
-    return mbytes . 'MB '
+    return mbytes . 'MB'
   elseif (exists('kbytes'))
-    return kbytes . 'KB '
+    return kbytes . 'KB'
   else
-    return bytes . 'B '
-  endif
-endfunction
-
-function! LightlineFugitive()
-  try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = ''  " edit here for cool mark
-      let branch = fugitive#head()
-      return branch !=# '' ? mark.branch : ''
-    endif
-  catch
-  endtry
-  return ''
-endfunction
-
-function! LightlineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightlineFileencoding()
-  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc).(&bomb ? ',BOM' : '') : ''
-endfunction
-
-"return the syntax highlight group under the cursor ''
-function! LightlineCurrentblock()
-  let name = synIDattr(synID(line('.'),col('.'),1),'name')
-  if name == ''
-    return ''
-  else
-    return '[' . name . ']'
+    return bytes . 'B'
   endif
 endfunction
 
 "recalculate the trailing whitespace warning when idle, and after saving
-autocmd cursorhold,bufwritepost * unlet! b:lightline_trailing_space_warning
+autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 
 "return '[\s]' if trailing white space is detected
 "return '' otherwise
-function! LightlineTrailingSpaceWarning()
-  if !exists("b:lightline_trailing_space_warning")
+function! StatuslineTrailingSpaceWarning()
+    if !exists('b:statusline_trailing_space_warning')
 
-    if !&modifiable
-      let b:lightline_trailing_space_warning = ''
-      return b:lightline_trailing_space_warning
+        if !&modifiable
+            let b:statusline_trailing_space_warning = ''
+            return b:statusline_trailing_space_warning
+        endif
+
+        if search('\s\+$', 'nw') != 0
+            let b:statusline_trailing_space_warning = '[\s]'
+        else
+            let b:statusline_trailing_space_warning = ''
+        endif
     endif
+    return b:statusline_trailing_space_warning
+endfunction
 
-    if search('\s\+$', 'nw') != 0
-      let b:lightline_trailing_space_warning = '[\s]'
-      call lightline#update()
+"return the syntax highlight group under the cursor ''
+function! StatuslineCurrentHighlight()
+    let name = synIDattr(synID(line('.'),col('.'),1),'name')
+    if name == ''
+        return ''
     else
-      let b:lightline_trailing_space_warning = ''
+        return winwidth(0) > 70 ? ' {' . name . '} ' : ''
     endif
-  endif
-  return b:lightline_trailing_space_warning
 endfunction
 
 "recalculate the tab warning flag when idle and after writing
-autocmd cursorhold,bufwritepost * unlet! b:lightline_tab_warning
+autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
 
 "return '[&et]' if &et is set wrong
-"return '[mixed-indenting]' if spaces and tabs are used to indent
+"return '[mix-indent]' if spaces and tabs are used to indent
 "return an empty string if everything is fine
-function! LightlineTabWarning()
-  if !exists("b:statusline_tab_warning")
-    let b:lightline_tab_warning = ''
+function! StatuslineTabWarning()
+    if !exists('b:statusline_tab_warning')
+        let b:statusline_tab_warning = ''
 
-    if !&modifiable
-      return b:lightline_tab_warning
+        if !&modifiable
+            return b:statusline_tab_warning
+        endif
+
+        let tabs = search('^\t', 'nw') != 0
+
+        "find spaces that arent used as alignment in the first indent column
+        let spaces = search('^ \{' . &ts . ',}[^\t]', 'nw') != 0
+
+        if tabs && spaces
+            let b:statusline_tab_warning =  '[mix-indent]'
+        elseif (spaces && !&et) || (tabs && &et)
+            let b:statusline_tab_warning = '[&et]'
+        endif
     endif
-
-    let tabs = search('^\t', 'nw') != 0
-
-    "find spaces that arent used as alignment in the first indent column
-    let spaces = search('^ \{' . &ts . ',}[^\t]', 'nw') != 0
-
-    if tabs && spaces
-      let b:lightline_tab_warning =  '[mix-indent]'
-    elseif (spaces && !&et) || (tabs && &et)
-      let b:lightline_tab_warning = '[&et]'
-    endif
-  endif
-  return b:lightline_tab_warning
+    return b:statusline_tab_warning
 endfunction
-
-function! LightlineMode()
-  let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
-
-let g:ctrlp_status_func = {
-      \ 'main': 'CtrlPStatusFunc_1',
-      \ 'prog': 'CtrlPStatusFunc_2',
-      \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
-endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
-
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
-
-let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
-let g:vimshell_force_overwrite_statusline = 0
-
-augroup vimrc
-  autocmd!
-augroup END
 
 " Intuitive backspacing
 set backspace=indent,eol,start
@@ -1070,10 +1003,10 @@ let g:ctrlp_reuse_window = 'startify'
 " ----------------------------------------------------------------------------
 " Syntastic {
 " ----------------------------------------------------------------------------
+let syntastic_stl_format = '[Syntax: %E{line:%fe }%W{#W:%w}%B{ }%E{#E:%e}]'
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
@@ -1415,8 +1348,6 @@ else
   colorscheme gruvbox
 endif
 
-" Don't show the mode since statusline shows it
-set noshowmode
 " Set the title of the window in the terminal to the file
 set title
 " Resize windows as little as possible
