@@ -245,18 +245,14 @@ set statusline+=%#ModeMsg#
 set statusline+=%{&paste?'[paste]':''}
 set statusline+=%*
 
-set statusline+=%##
-
+set statusline+=%#SpecialKey#
 " Left/right separator
 set statusline+=%=
-
-set statusline+=%*
-set statusline+=%#SpecialKey#
+" Show current code block section type
 set statusline+=%{StatuslineCurrentHighlight()}
 set statusline+=%*
-" set statusline+=%#Identifier#
+" Cursor coordinates
 set statusline+=%-.(\ %c,%l/%L\ %p%%%)
-" set statusline+=%*
 
 function! StatuslineWorkingDirectory()
   return winwidth(0) > 70 ? ' [' . getcwd() . ']' : ''
