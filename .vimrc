@@ -995,11 +995,15 @@ let g:snips_author = 'Igor R. Plity <iryston@iryston.net>'
 " ----------------------------------------------------------------------------
 " Startify {
 " ----------------------------------------------------------------------------
+" Disable startify welcome screen on vim launch
+let g:startify_disable_at_vimenter = 1
+" Add bookmarks
 let g:startify_bookmarks = [
       \ $HOME . '/.vimrc'
       \ ]
 " Disable random quotes header
 let g:startify_custom_header = []
+" Don't check files in lists
 let g:startify_enable_unsafe = 0
 " Prevent CtrlP to open a split in Startify
 let g:ctrlp_reuse_window = 'startify'
