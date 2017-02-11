@@ -173,6 +173,8 @@ add_spellcheck() {
 
   curl 'http://ftp.vim.org/vim/runtime/spell/ru.utf-8.spl' -o "$target_path/.vim/spell/ru.utf-8.spl"
   curl 'http://ftp.vim.org/vim/runtime/spell/ru.utf-8.sug' -o "$target_path/.vim/spell/ru.utf-8.sug"
+  curl 'http://ftp.vim.org/vim/runtime/spell/en.utf-8.spl' -o "$target_path/.vim/spell/en.utf-8.spl"
+  curl 'http://ftp.vim.org/vim/runtime/spell/en.utf-8.sug' -o "$target_path/.vim/spell/en.utf-8.sug"
 
   success  "Download and install spell files"
   debug
