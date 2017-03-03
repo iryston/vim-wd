@@ -150,6 +150,8 @@
       Plug 'rhysd/conflict-marker.vim'
       " A tree explorer plugin for vim
       Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
+      " A solid language pack for Vim
+      Plug 'sheerun/vim-polyglot'
       " A simple function navigator for ctrlp.vim
       Plug 'tacahiroy/ctrlp-funky'
       " Abbreviation, substitution and coercion
@@ -249,12 +251,12 @@
   " HTML {
   " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'html')
-      Plug 'ap/vim-css-color', { 'for': ['css', 'html', 'less', 'sass', 'scss', 'stylus'] }
-      Plug 'digitaltoad/vim-pug', { 'for': ['html', 'pug'] }
-      Plug 'hail2u/vim-css3-syntax'
+      " Plug 'ap/vim-css-color', { 'for': ['css', 'html', 'less', 'sass', 'scss', 'stylus'] }
+      " Plug 'digitaltoad/vim-pug', { 'for': ['html', 'pug'] }
+      " Plug 'hail2u/vim-css3-syntax'
       Plug 'kewah/vim-stylefmt'
       Plug 'mattn/emmet-vim', { 'for': ['css', 'html', 'htmldjango', 'jinja', 'xsl'] }
-      Plug 'tpope/vim-haml'
+      " Plug 'tpope/vim-haml'
     endif
   " }
 
