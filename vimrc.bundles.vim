@@ -288,8 +288,6 @@
   " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'python')
       Plug 'Glench/Vim-Jinja2-Syntax'
-      Plug 'pythoncomplete'
-      Plug 'python_match.vim'
       Plug 'yssource/python.vim'
     endif
   " }
