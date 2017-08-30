@@ -173,7 +173,7 @@
   " Color Schemes {
   " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'colorschemes')
-      Plug 'morhetz/gruvbox'
+      Plug 'iryston/gruvbox'
     endif
   " }
 
