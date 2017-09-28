@@ -347,7 +347,6 @@
     if count(g:bundle_groups, 'misc')
       Plug 'Chiel92/vim-autoformat'
       Plug 'chrisbra/unicode.vim'
-      Plug 'evanmiller/nginx-vim-syntax'
       Plug 'freitass/todo.txt-vim'
       Plug 'honza/dockerfile.vim'
       Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
