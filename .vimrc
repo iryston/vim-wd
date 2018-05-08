@@ -1358,8 +1358,12 @@ if has('gui_running')
 else
   if &term == 'xterm' || &term == 'xterm-256color' || &term == 'screen'
     set t_Co=256 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
-    "let &t_SI = "\<Esc>]12;Blue\x7"
-    "let &t_EI = "\<Esc>]12;NavyBlue\x7"
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    " Change cursor shape based on mode if terminal supports that
+    let &t_SI = "\<Esc>[6 q"
+    let &t_SR = "\<Esc>[4 q"
+    let &t_EI = "\<Esc>[2 q"
   endif
   if has('nvim')
     set termguicolors
