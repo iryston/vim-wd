@@ -131,6 +131,8 @@
     if count(g:bundle_groups, 'general')
       " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
       Plug 'ctrlpvim/ctrlp.vim'
+      " An ack.vim alternative mimics Ctrl-Shift-F on Sublime Text 2
+      Plug 'dyng/ctrlsf.vim'
       " A command-line fuzzy finder written in Go
       Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
       Plug 'junegunn/fzf.vim'
