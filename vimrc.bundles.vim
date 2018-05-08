@@ -181,18 +181,30 @@
   " General Programming {
   " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'programming')
-      Plug 'AndrewRadev/linediff.vim' " Perform diffs on blocks of code
-      Plug 'AndrewRadev/splitjoin.vim' " Simplify the transition between multiline and single-line code
+     " Perform diffs on blocks of code
+      Plug 'AndrewRadev/linediff.vim'
+      " Simplify the transition between multiline and single-line code
+      Plug 'AndrewRadev/splitjoin.vim'
+      " EditorConfig plugin for Vim http://editorconfig.org
       Plug 'editorconfig/editorconfig-vim'
+      " Vim script for text filtering and alignment
       Plug 'godlygeek/tabular'
+      " A git commit browser
       Plug 'junegunn/gv.vim', { 'on': 'GV' }
+      " Vim script for creating gists
       Plug 'mattn/gist-vim'
+      " An Interface to WEB APIs
       Plug 'mattn/webapi-vim'
+      " A Vim plugin for more pleasant editing on commit messages
       Plug 'rhysd/committia.vim'
-      Plug 'tpope/vim-commentary', { 'on': [ '<Plug>Commentary', '<Plug>CommentaryLine' ] } " Comment stuff out
+      " Comment stuff out, takes a motion as a target
+      Plug 'tpope/vim-commentary', { 'on': [ '<Plug>Commentary', '<Plug>CommentaryLine' ] }
+      " A Git wrapper
       Plug 'tpope/vim-fugitive'
+      " Syntax checking hacks for vim
       Plug 'vim-syntastic/syntastic', { 'on': [ 'SyntasticCheck', 'SyntasticInfo', 'SyntasticToggleMode' ] }
       if executable('ctags')
+        " A class outline viewer for Vim
         Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
       endif
     endif
