@@ -201,6 +201,8 @@
       Plug 'tpope/vim-commentary', { 'on': [ '<Plug>Commentary', '<Plug>CommentaryLine' ] }
       " A Git wrapper
       Plug 'tpope/vim-fugitive'
+      " Asynchronous Lint Engine is a plugin for providing linting in NeoVim and Vim 8
+      Plug 'w0rp/ale'
       " Syntax checking hacks for vim
       Plug 'vim-syntastic/syntastic', { 'on': [ 'SyntasticCheck', 'SyntasticInfo', 'SyntasticToggleMode' ] }
       if executable('ctags')

@@ -1043,6 +1043,18 @@ highlight link SyntasticStyleWarningSign SignColumn
 " }
 
 " ----------------------------------------------------------------------------
+" ALE {
+" ----------------------------------------------------------------------------
+if executable('stylelint')
+  let g:ale_fixers = { 'css': ['stylelint'], }
+endif
+
+if executable('eslint')
+  let g:ale_fixers = { 'javascript': ['eslint'], }
+endif
+" }
+
+" ----------------------------------------------------------------------------
 " NerdTree {
 " ----------------------------------------------------------------------------
 if isdirectory(expand('~/.vim/bundle/nerdtree'))
