@@ -8,13 +8,13 @@
   " Identify platform {
   " --------------------------------------------------------------------------
     silent function! OSX()
-      return has('macunix')
+      return (has('mac') || has('macunix'))
     endfunction
     silent function! LINUX()
-      return has('unix') && !has('macunix') && !has('win32unix')
+      return (has('unix') && !has('macunix') && !has('win32unix'))
     endfunction
     silent function! WINDOWS()
-      return  (has('win32') || has('win64'))
+      return (has('win32') || has('win64'))
     endfunction
   " }
 
@@ -366,6 +366,7 @@
       Plug 'Chiel92/vim-autoformat'
       Plug 'chrisbra/unicode.vim'
       Plug 'freitass/todo.txt-vim'
+      " Plug 'https://gitlab.com/dbeniamine/todo.txt-vim'
       Plug 'honza/dockerfile.vim'
       Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
       Plug 'mhinz/vim-startify'

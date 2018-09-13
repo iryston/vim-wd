@@ -1338,25 +1338,25 @@ if has('gui_running')
   set guioptions-=l
   "No scrollbar on the left when there are splits
   set guioptions-=L
-" Maximize window on start
+  "Maximize window on start
   set lines=999 columns=999
   if OSX() && has("gui_running")
     set fullscreen
   endif
-  " Set fonts
+  " Set font according to system
   if LINUX() && has("gui_running")
-    set guifont=Roboto\ Mono\ Light\ 15,Input\ Mono\ Light\ 14,Consolas\ 17,Source\ Code\ Pro\ 15,Cousine\ 15,Hack\ 15,Ubuntu\ Mono\ 18,Menlo\ Regular\ 15,Courier\ New\ 16
+    set guifont=Iosevka\ Term\ 17,IBM\ Plex\ Mono\ 15,Roboto\ Mono\ Light\ 15,Input\ Mono\ Light\ 14,Consolas\ 17,Source\ Code\ Pro\ 15,Cousine\ 15,Hack\ 15,Ubuntu\ Mono\ 18,Menlo\ Regular\ 15,Courier\ New\ 16
   elseif OSX() && has("gui_running")
-    set guifont=Roboto\ Mono\ Light:h15,InputMono\ Light:h14,Consolas:h17,Source\ Code\ Pro:h15,Cousine:h15,Hack\ Regular:h15,Menlo\ Regular:h15,Ubuntu\ Mono:18,Courier\ New:h16
+    set guifont=Iosevka\ Term:h17,IBM\ Plex\ Mono:h15,Roboto\ Mono\ Light:h15,InputMono\ Light:h14,Consolas:h17,Source\ Code\ Pro:h15,Cousine:h15,Hack\ Regular:h15,Menlo\ Regular:h15,Ubuntu\ Mono:18,Courier\ New:h16
   elseif WINDOWS() && has("gui_running")
-    set guifont=Roboto_Mono_Light:h15,InputMono_Light:h14,Consolas:h17,Source_Code_Pro:h15,Cousine:h15,Hack_Regular:h15,Menlo_Regular:h15,Ubuntu_Mono:18,Courier_New:h16
+    set guifont=Iosevka_Term:h17,IBM_Plex_Mono:h15,Roboto_Mono_Light:h15,InputMono_Light:h14,Consolas:h17,Source_Code_Pro:h15,Cousine:h15,Hack_Regular:h15,Menlo_Regular:h15,Ubuntu_Mono:18,Courier_New:h16
   endif
   let g:gruvbox_contrast_dark='soft'
   let g:gruvbox_contrast_light='soft'
   set background=dark
   colorscheme gruvbox
 else
-  if &term == 'xterm' || &term == 'xterm-256color' || &term == 'screen'
+  if &term == 'xterm' || &term == 'xterm-256color' || &term == 'screen' || &term == 'screen-256color'
     set t_Co=256 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
     if !has('nvim') && has('patch-7.4.1770')
       let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -1367,7 +1367,7 @@ else
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
   endif
-  if has('nvim')
+  if has('termguicolors')
     set termguicolors
   endif
   let g:gruvbox_contrast_dark='soft'
