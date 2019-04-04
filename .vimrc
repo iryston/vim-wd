@@ -1353,8 +1353,14 @@ if has('gui_running')
   endif
   let g:gruvbox_contrast_dark='soft'
   let g:gruvbox_contrast_light='soft'
-  set background=dark
-  colorscheme gruvbox
+  " set background=dark at night and set background=light at daytime
+  if strftime('%H') >= 7 && strftime('%H') < 19
+    set background=light
+  else
+    set background=dark
+  endif
+  " colorscheme gruvbox
+  colorscheme cosmic_latte
 else
   if &term == 'xterm' || &term == 'xterm-256color' || &term == 'screen' || &term == 'screen-256color'
     set t_Co=256 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
@@ -1372,8 +1378,14 @@ else
   endif
   let g:gruvbox_contrast_dark='soft'
   let g:gruvbox_contrast_light='soft'
-  set background=dark
-  colorscheme gruvbox
+  " set background=dark at night and set background=light at daytime
+  if strftime('%H') >= 7 && strftime('%H') < 19
+    set background=light
+  else
+    set background=dark
+  endif
+  " colorscheme gruvbox
+  colorscheme cosmic_latte
 endif
 
 " Set the title of the window in the terminal to the file
