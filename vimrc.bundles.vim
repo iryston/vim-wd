@@ -165,7 +165,7 @@
       " Delete, change and add such surroundings in pairs
       Plug 'tpope/vim-surround'
       " Extended % matching for HTML, LaTeX, and many other languages
-      Plug 'vim-scripts/matchit.zip'
+      Plug 'andymass/vim-matchup'
       " A plugin for automatically restoring file's cursor position and folding
       Plug 'vim-scripts/restore_view.vim'
       " Work with Vim sessions by keeping them in the dedicated location
