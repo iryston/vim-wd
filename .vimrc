@@ -905,6 +905,29 @@ endfunction
 if isdirectory(expand('~/.vim/bundle/matchit.zip'))
   let b:match_ignorecase = 1
 endif
+
+if isdirectory(expand('~/.vim/bundle/vim-matchup'))
+  " Configure the number of lines to search in either direction
+  " while using motions and text objects
+  let g:matchup_delim_stopline = 150
+  " For match highlighting only
+  let g:matchup_matchparen_stopline = 150
+  " Deferred highlighting
+  let g:matchup_matchparen_deferred = 1
+  " Adjust delays in milliseconds for deferred highlighting
+  let g:matchup_matchparen_deferred_show_delay = 100
+  let g:matchup_matchparen_deferred_hide_delay = 1400
+  " Adjust timeouts in milliseconds for matchparen highlighting
+  let g:matchup_matchparen_timeout = 1000
+  let g:matchup_matchparen_insert_timeout = 1000
+  " Hide matches that are outside of the vim screen
+  let g:matchup_matchparen_status_offscreen = 0
+  " Disable a particular module
+  let g:matchup_matchparen_enabled = 0
+  " let g:matchup_motion_enabled = 0
+  let g:matchup_text_obj_enabled = 0
+endif
+
 " }
 
 " ----------------------------------------------------------------------------
@@ -1351,8 +1374,9 @@ if has('gui_running')
   elseif WINDOWS() && has("gui_running")
     set guifont=Iosevka_Term:h17,IBM_Plex_Mono:h15,Roboto_Mono_Light:h15,InputMono_Light:h14,Consolas:h17,Source_Code_Pro:h15,Cousine:h15,Hack_Regular:h15,Menlo_Regular:h15,Ubuntu_Mono:18,Courier_New:h16
   endif
-  let g:gruvbox_contrast_dark='soft'
-  let g:gruvbox_contrast_light='soft'
+  " Set gruvbox colorscheme variant
+  let g:gruvbox_contrast_dark='medium'
+  let g:gruvbox_contrast_light='hard'
   " set background=dark at night and set background=light at daytime
   if strftime('%H') >= 7 && strftime('%H') < 19
     set background=light
@@ -1376,8 +1400,9 @@ else
   if has('termguicolors')
     set termguicolors
   endif
-  let g:gruvbox_contrast_dark='soft'
-  let g:gruvbox_contrast_light='soft'
+  " Set gruvbox colorscheme variant
+  let g:gruvbox_contrast_dark='medium'
+  let g:gruvbox_contrast_light='hard'
   " set background=dark at night and set background=light at daytime
   if strftime('%H') >= 7 && strftime('%H') < 19
     set background=light
