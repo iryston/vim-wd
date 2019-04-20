@@ -55,6 +55,10 @@ set synmaxcol=2048
 set mouse=a
 " Hide the mouse cursor while typing
 set mousehide
+"Mouse reporting in a big terminal window
+if has('mouse_sgr')
+  set ttymouse=sgr
+endif
 
 if has('clipboard')
   if has('unnamedplus')  " When possible use + register for copy-paste
