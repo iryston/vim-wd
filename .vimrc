@@ -1377,12 +1377,6 @@ if has('gui_running')
   " Set gruvbox colorscheme variant
   let g:gruvbox_contrast_dark='medium'
   let g:gruvbox_contrast_light='hard'
-  " set background=dark at night and set background=light at daytime
-  if strftime('%H') >= 7 && strftime('%H') < 19
-    set background=light
-  else
-    set background=dark
-  endif
   " colorscheme gruvbox
   colorscheme cosmic_latte
 else
@@ -1403,12 +1397,6 @@ else
   " Set gruvbox colorscheme variant
   let g:gruvbox_contrast_dark='medium'
   let g:gruvbox_contrast_light='hard'
-  " set background=dark at night and set background=light at daytime
-  if strftime('%H') >= 7 && strftime('%H') < 19
-    set background=light
-  else
-    set background=dark
-  endif
   " colorscheme gruvbox
   colorscheme cosmic_latte
 endif
