@@ -1377,6 +1377,8 @@ if has('gui_running')
   " Set gruvbox colorscheme variant
   let g:gruvbox_contrast_dark='medium'
   let g:gruvbox_contrast_light='hard'
+  " Set default background to dark
+  set background=dark
   " colorscheme gruvbox
   colorscheme cosmic_latte
 else
@@ -1397,6 +1399,8 @@ else
   " Set gruvbox colorscheme variant
   let g:gruvbox_contrast_dark='medium'
   let g:gruvbox_contrast_light='hard'
+  " Set default background to dark
+  set background=dark
   " Check iTerm2 background
   if OSX()
     if !exists('$ITERM_PROFILE') || $ITERM_PROFILE == 'Light'
