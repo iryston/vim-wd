@@ -1397,6 +1397,14 @@ else
   " Set gruvbox colorscheme variant
   let g:gruvbox_contrast_dark='medium'
   let g:gruvbox_contrast_light='hard'
+  " Check iTerm2 background
+  if OSX()
+    if !exists('$ITERM_PROFILE') || $ITERM_PROFILE == 'Light'
+      set background=light
+    else
+      set background=dark
+    endif
+  endif
   " colorscheme gruvbox
   colorscheme cosmic_latte
 endif
