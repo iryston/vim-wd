@@ -1677,6 +1677,7 @@ augroup vimrc
   au BufNewFile,BufRead *.pde               set filetype=java
   au BufNewFile,BufRead *.coffee-processing set filetype=coffee
   au BufNewFile,BufRead Dockerfile*         set filetype=dockerfile
+  au BufNewFile,BufRead *.svelte            set filetype=html
 
   " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
   au BufNewFile,BufRead,InsertLeave * silent! match ExtraWhitespace /\s\+$/
