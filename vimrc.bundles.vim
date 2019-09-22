@@ -114,6 +114,7 @@
     let g:bundle_groups=[ 'general'
           \, 'codecompletion'
           \, 'colorschemes'
+          \, 'go'
           \, 'html'
           \, 'javascript'
           \, 'misc'
@@ -245,7 +246,7 @@
   " Go Lang {
   " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'go')
-      Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+      Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     endif
   " }
 
