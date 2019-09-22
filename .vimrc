@@ -399,6 +399,11 @@ set smartcase
 set wildmenu
 " Command <Tab> completion, list matches, then longest common part, then all
 set wildmode=list:longest,full
+" Stuff to ignore when tab completing
+set wildignore=*.o,*.obj,*~
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=*.png,*.jpg,*.gif
 " Backspace and cursor keys wrap too
 set whichwrap=b,s,h,l,<,>,[,]
 " Lines to scroll when cursor leaves screen
