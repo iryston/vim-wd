@@ -137,8 +137,12 @@
         Plug 'dyng/ctrlsf.vim'
       endif
       " A command-line fuzzy finder written in Go
-      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-      Plug 'junegunn/fzf.vim'
+      if isdirectory('/usr/local/opt/fzf')
+        Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+      else
+        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+        Plug 'junegunn/fzf.vim'
+      endif
       " A set of mappings for enhancing in-buffer search experience in Vim
       Plug 'junegunn/vim-slash'
       " Opens the file manager or terminal at the directory of the current file in Vim.
