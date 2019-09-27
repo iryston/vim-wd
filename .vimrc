@@ -515,22 +515,22 @@ endfunction
 " ----------------------------------------------------------------------------
 " Map g* keys in Normal, Operator-pending, and Visual+select
 " ----------------------------------------------------------------------------
-noremap $ :call WrapRelativeMotion("$")<CR>
-noremap <End> :call WrapRelativeMotion("$")<CR>
-noremap 0 :call WrapRelativeMotion("0")<CR>
-noremap <Home> :call WrapRelativeMotion("0")<CR>
-noremap ^ :call WrapRelativeMotion("^")<CR>
+noremap $ :call WrapRelativeMotion("$")<cr>
+noremap <End> :call WrapRelativeMotion("$")<cr>
+noremap 0 :call WrapRelativeMotion("0")<cr>
+noremap <Home> :call WrapRelativeMotion("0")<cr>
+noremap ^ :call WrapRelativeMotion("^")<cr>
 " Overwrite the operator pending $/<End> mappings from above
 " to force inclusive motion with :execute normal!
-onoremap $ v:call WrapRelativeMotion("$")<CR>
-onoremap <End> v:call WrapRelativeMotion("$")<CR>
+onoremap $ v:call WrapRelativeMotion("$")<cr>
+onoremap <End> v:call WrapRelativeMotion("$")<cr>
 " Overwrite the Visual+select mode mappings from above
 " to ensure the correct vis_sel flag is passed to function
-vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
-vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
-vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
-vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
-vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
+vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<cr>
+vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<cr>
+vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<cr>
+vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<cr>
+vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<cr>
 
 " ----------------------------------------------------------------------------
 " Stupid shift key fixes
@@ -552,16 +552,16 @@ cmap Tabe tabe
 " ----------------------------------------------------------------------------
 " Code folding options
 " ----------------------------------------------------------------------------
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
+nmap <leader>f0 :set foldlevel=0<cr>
+nmap <leader>f1 :set foldlevel=1<cr>
+nmap <leader>f2 :set foldlevel=2<cr>
+nmap <leader>f3 :set foldlevel=3<cr>
+nmap <leader>f4 :set foldlevel=4<cr>
+nmap <leader>f5 :set foldlevel=5<cr>
+nmap <leader>f6 :set foldlevel=6<cr>
+nmap <leader>f7 :set foldlevel=7<cr>
+nmap <leader>f8 :set foldlevel=8<cr>
+nmap <leader>f9 :set foldlevel=9<cr>
 
 " ----------------------------------------------------------------------------
 "UPPERCASE and lowercase conversion
@@ -595,15 +595,15 @@ xnoremap > >gv
 " Most prefer to toggle search highlighting rather than clear the current
 " search results. To clear search highlighting rather than toggle it on
 " and off, uncomment next line
-" nmap <silent> <leader>/ :nohlsearch<CR>
+" nmap <silent> <leader>/ :nohlsearch<cr>
 " and comment the next one
 " ----------------------------------------------------------------------------
-nmap <silent> <leader>/ :set invhlsearch<CR>
+nmap <silent> <leader>/ :set invhlsearch<cr>
 
 " ----------------------------------------------------------------------------
 " Find merge conflict markers
 " ----------------------------------------------------------------------------
-map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+map <leader>fc /\v^[<\|=>]{7}( .*\|$)<cr>
 
 " ----------------------------------------------------------------------------
 " Shortcuts
@@ -622,7 +622,7 @@ vnoremap > >gv
 " Allow using the repeat operator with a visual selection (!)
 " http://stackoverflow.com/a/8064607/127816
 " ----------------------------------------------------------------------------
-vnoremap . :normal .<CR>
+vnoremap . :normal .<cr>
 
 " ----------------------------------------------------------------------------
 " Some helpers to edit mode
@@ -643,7 +643,7 @@ map <Leader>= <C-w>=
 " Map <Leader>ff to display all lines with keyword under cursor
 " and ask which one to jump to
 " ----------------------------------------------------------------------------
-nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<cr>
 
 " ----------------------------------------------------------------------------
 " Easier horizontal scrolling
@@ -659,7 +659,7 @@ map zh zH
 " ----------------------------------------------------------------------------
 " Show/Hide hidden Chars
 " ----------------------------------------------------------------------------
-map <silent> <C-h> :set invlist<CR>
+map <silent> <C-h> :set invlist<cr>
 
 " ----------------------------------------------------------------------------
 " Save
@@ -980,17 +980,40 @@ nmap ga <Plug>(EasyAlign)
 " FZF {
 " ----------------------------------------------------------------------------
 
-if has('nvim')
+if has('nvim') || has('gui_running')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
 
 " File preview using Highlight (http://www.andre-simon.de/doku/highlight/en/highlight.php)
 let g:fzf_files_options = printf('--preview "%s {} | head -'.&lines.'"',
-      \ g:plugs['fzf.vim'].dir.'/bin/preview.rb')
+  \ g:plugs['fzf.vim'].dir.'/bin/preview.rb')
 
-" nnoremap <silent> <Leader><Enter> :Files<CR>
+" Search includes hidden files (:FilesAll)
+" TODO unify options
+if executable('rg')
+  command! -nargs=? -complete=dir FilesAll
+  \ call fzf#run(fzf#wrap(fzf#vim#with_preview({
+  \ 'source': 'rg --files --hidden --follow -g "!{.git,*.swp}/**" . '.expand(<q-args>)
+  \ })))
+elseif executable('fd')
+  command! -nargs=? -complete=dir FilesAll
+  \ call fzf#run(fzf#wrap(fzf#vim#with_preview({
+  \ 'source': 'fd --type f --hidden --follow --exclude .git --no-ignore . '.expand(<q-args>)
+  \ })))
+elseif executable('ag')
+  command! -nargs=? -complete=dir FilesAll
+  \ call fzf#run(fzf#wrap(fzf#vim#with_preview({
+  \ 'source': 'ag --hidden --ignore .git -g ""'.expand(<q-args>)
+  \ })))
+else
+  command! -nargs=? -complete=dir FilesAll
+  \ call fzf#run(fzf#wrap(fzf#vim#with_preview({
+  \ 'source': 'find --type f --hidden --follow --exclude .git --no-ignore . '.expand(<q-args>)
+  \ })))
+endif
+
 nnoremap <silent> <expr> <Leader><Enter> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
-nnoremap <silent> <Leader><Leader> :Buffers<CR>
+nnoremap <silent> <Leader><Leader> :Buffers<cr>
 
 inoremap <expr> <c-x><c-t> fzf#complete('tmuxwords.rb --all-but-current --scroll 500 --min 5')
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -1002,19 +1025,30 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
-command! Plugs call fzf#run({
+function! s:plug_help_sink(line)
+  let dir = g:plugs[a:line].dir
+  for pat in ['doc/*.txt', 'README.md']
+    let match = get(split(globpath(dir, pat), "\n"), 0, '')
+    if len(match)
+      execute 'tabedit' match
+      return
+    endif
+  endfor
+  tabnew
+  execute 'Explore' dir
+endfunction
+
+command! PlugHelp
+  \ call fzf#run(fzf#wrap({
+  \ 'source': sort(keys(g:plugs)),
+  \ 'sink':   function('s:plug_help_sink')}))
+
+command! Plugs
+  \ call fzf#run(fzf#wrap({
   \ 'source':  map(sort(keys(g:plugs)), 'g:plug_home."/".v:val'),
   \ 'options': '--delimiter / --nth -1',
   \ 'down':    '~40%',
-  \ 'sink':    'Explore'})
-
-" Search includes hidden files (HFiles)
-" TODO: need more work
-" - choose right word for command.
-if executable('ag')
-  command! -bang -nargs=? -complete=dir HFiles
-        \ call fzf#vim#files(<q-args>, {'source': 'ag --hidden --ignore .git -g ""'}, <bang>0)
-endif
+  \ 'sink':    'Explore'}))
 " }
 
 " ----------------------------------------------------------------------------
@@ -1122,22 +1156,22 @@ endif
 " Tabularize {
 " ----------------------------------------------------------------------------
 if isdirectory(expand('~/.vim/bundle/tabular'))
-  nmap <Leader>a& :Tabularize /&<CR>
-  vmap <Leader>a& :Tabularize /&<CR>
-  nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-  vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-  nmap <Leader>a=> :Tabularize /=><CR>
-  vmap <Leader>a=> :Tabularize /=><CR>
-  nmap <Leader>a: :Tabularize /:<CR>
-  vmap <Leader>a: :Tabularize /:<CR>
-  nmap <Leader>a:: :Tabularize /:\zs<CR>
-  vmap <Leader>a:: :Tabularize /:\zs<CR>
-  nmap <Leader>a, :Tabularize /,<CR>
-  vmap <Leader>a, :Tabularize /,<CR>
-  nmap <Leader>a,, :Tabularize /,\zs<CR>
-  vmap <Leader>a,, :Tabularize /,\zs<CR>
-  nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-  vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+  nmap <Leader>a& :Tabularize /&<cr>
+  vmap <Leader>a& :Tabularize /&<cr>
+  nmap <Leader>a= :Tabularize /^[^=]*\zs=<cr>
+  vmap <Leader>a= :Tabularize /^[^=]*\zs=<cr>
+  nmap <Leader>a=> :Tabularize /=><cr>
+  vmap <Leader>a=> :Tabularize /=><cr>
+  nmap <Leader>a: :Tabularize /:<cr>
+  vmap <Leader>a: :Tabularize /:<cr>
+  nmap <Leader>a:: :Tabularize /:\zs<cr>
+  vmap <Leader>a:: :Tabularize /:\zs<cr>
+  nmap <Leader>a, :Tabularize /,<cr>
+  vmap <Leader>a, :Tabularize /,<cr>
+  nmap <Leader>a,, :Tabularize /,\zs<cr>
+  vmap <Leader>a,, :Tabularize /,\zs<cr>
+  nmap <Leader>a<Bar> :Tabularize /<Bar><cr>
+  vmap <Leader>a<Bar> :Tabularize /<Bar><cr>
 endif
 " }
 
@@ -1146,16 +1180,16 @@ endif
 " ----------------------------------------------------------------------------
 set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
 if isdirectory(expand('~/.vim/bundle/sessionman.vim/'))
-  nmap <leader>sl :SessionList<CR>
-  nmap <leader>ss :SessionSave<CR>
-  nmap <leader>sc :SessionClose<CR>
+  nmap <leader>sl :SessionList<cr>
+  nmap <leader>ss :SessionSave<cr>
+  nmap <leader>sc :SessionClose<cr>
 endif
 " }
 
 " ----------------------------------------------------------------------------
 " JSON {
 " ----------------------------------------------------------------------------
-nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
+nmap <leader>jt <Esc>:%!python -m json.tool<cr><Esc>:set filetype=json<cr>
 let g:vim_json_syntax_conceal = 0
 " }
 
@@ -1180,13 +1214,17 @@ endif
 " ----------------------------------------------------------------------------
 if isdirectory(expand('~/.vim/bundle/ctrlp.vim/'))
   let g:ctrlp_working_path_mode = 'ra'
-  nnoremap <silent> <D-t> :CtrlP<CR>
-  nnoremap <silent> <D-r> :CtrlPMRU<CR>
+  nnoremap <silent> <D-t> :CtrlP<cr>
+  nnoremap <silent> <D-r> :CtrlPMRU<cr>
   let g:ctrlp_custom_ignore = {
         \ 'dir':  '\.git$\|\.hg$\|\.svn$',
         \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 
-  if executable('ag')
+  if executable('rg')
+    let s:ctrlp_fallback = 'rg %s --files --color=never --glob ""'
+  elseif executable('fd')
+    let s:ctrlp_fallback = 'fd %s -type f'
+  elseif executable('ag')
     let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
   elseif executable('ack-grep')
     let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
@@ -1222,18 +1260,18 @@ endif
 " Fugitive {
 " ----------------------------------------------------------------------------
 if isdirectory(expand('~/.vim/bundle/vim-fugitive/'))
-  nnoremap <silent> <leader>gs :Gstatus<CR>
-  nnoremap <silent> <leader>gd :Gdiff<CR>
-  nnoremap <silent> <leader>gc :Gcommit<CR>
-  nnoremap <silent> <leader>gb :Gblame<CR>
-  nnoremap <silent> <leader>gl :Glog<CR>
-  nnoremap <silent> <leader>gp :Git push<CR>
-  nnoremap <silent> <leader>gr :Gread<CR>
-  nnoremap <silent> <leader>gw :Gwrite<CR>
-  nnoremap <silent> <leader>ge :Gedit<CR>
+  nnoremap <silent> <leader>gs :Gstatus<cr>
+  nnoremap <silent> <leader>gd :Gdiff<cr>
+  nnoremap <silent> <leader>gc :Gcommit<cr>
+  nnoremap <silent> <leader>gb :Gblame<cr>
+  nnoremap <silent> <leader>gl :Glog<cr>
+  nnoremap <silent> <leader>gp :Git push<cr>
+  nnoremap <silent> <leader>gr :Gread<cr>
+  nnoremap <silent> <leader>gw :Gwrite<cr>
+  nnoremap <silent> <leader>ge :Gedit<cr>
   " Mnemonic _i_nteractive
-  nnoremap <silent> <leader>gi :Git add -p %<CR>
-  nnoremap <silent> <leader>gg :SignifyToggle<CR>
+  nnoremap <silent> <leader>gi :Git add -p %<cr>
+  nnoremap <silent> <leader>gg :SignifyToggle<cr>
 endif
 "}
 
@@ -1265,7 +1303,7 @@ endif
 " UndoTree {
 " ----------------------------------------------------------------------------
 if isdirectory(expand('~/.vim/bundle/undotree/'))
-  nnoremap <Leader>u :UndotreeToggle<CR>
+  nnoremap <Leader>u :UndotreeToggle<cr>
   " If undotree is opened, it is likely one wants to interact with it.
   let g:undotree_SetFocusWhenToggle=1
   let g:undotree_WindowLayout = 2
@@ -1438,27 +1476,27 @@ set noequalalways
 " Choose encoding for loading fle
 set wildmenu
 set wcm=<Tab>
-menu Encoding.Read.utf-8<Tab><F7> :e ++enc=utf8 <CR>
-menu Encoding.Read.windows-1251<Tab><F7> :e ++enc=cp1251<CR>
-menu Encoding.Read.koi8-r<Tab><F7> :e ++enc=koi8-r<CR>
-menu Encoding.Read.cp866<Tab><F7> :e ++enc=cp866<CR>
+menu Encoding.Read.utf-8<Tab><F7> :e ++enc=utf8 <cr>
+menu Encoding.Read.windows-1251<Tab><F7> :e ++enc=cp1251<cr>
+menu Encoding.Read.koi8-r<Tab><F7> :e ++enc=koi8-r<cr>
+menu Encoding.Read.cp866<Tab><F7> :e ++enc=cp866<cr>
 map <F7> :emenu Encoding.Read.<TAB>
 
 " Choose encoding for save file
 set wildmenu
 set wcm=<Tab>
-menu Encoding.Write.utf-8<Tab><S-F7> :set fenc=utf8 <CR>
-menu Encoding.Write.windows-1251<Tab><S-F7> :set fenc=cp1251<CR>
-menu Encoding.Write.koi8-r<Tab><S-F7> :set fenc=koi8-r<CR>
-menu Encoding.Write.cp866<Tab><S-F7> :set fenc=cp866<CR>
+menu Encoding.Write.utf-8<Tab><S-F7> :set fenc=utf8 <cr>
+menu Encoding.Write.windows-1251<Tab><S-F7> :set fenc=cp1251<cr>
+menu Encoding.Write.koi8-r<Tab><S-F7> :set fenc=koi8-r<cr>
+menu Encoding.Write.cp866<Tab><S-F7> :set fenc=cp866<cr>
 map <S-F7> :emenu Encoding.Write.<TAB>
 
-" Choose line endings (dos - <CR><NL>, unix - <NL>, mac - <CR>)
+" Choose line endings (dos - <cr><NL>, unix - <NL>, mac - <cr>)
 set wildmenu
 set wcm=<Tab>
-menu Encoding.End_line_format.unix<Tab><C-F7> :set fileformat=unix<CR>
-menu Encoding.End_line_format.dos<Tab><C-F7> :set fileformat=dos<CR>
-menu Encoding.End_line_format.mac<Tab><C-F7> :set fileformat=mac<CR>
+menu Encoding.End_line_format.unix<Tab><C-F7> :set fileformat=unix<cr>
+menu Encoding.End_line_format.dos<Tab><C-F7> :set fileformat=dos<cr>
+menu Encoding.End_line_format.mac<Tab><C-F7> :set fileformat=mac<cr>
 map <C-F7> :emenu Encoding.End_line_format.<TAB>
 " }
 
