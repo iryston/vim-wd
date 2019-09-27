@@ -1472,14 +1472,14 @@ set title
 " Resize windows as little as possible
 set noequalalways
 
+" Disable pseudo-transparency for completion menu
 if exists('&pumblend')
-	" Disable pseudo-transparency for completion menu
-	set pumblend=0
+  set pumblend=0
 endif
 
+" Disable pseudo-transparency for floating window
 if exists('&winblend')
-	" Disable pseudo-transparency for floating window
-	set winblend=0
+  set winblend=0
 endif
 
 " ----------------------------------------------------------------------------
