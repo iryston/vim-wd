@@ -436,8 +436,8 @@ set sidescrolloff=4
 set display+=lastline
 " Turn off folding
 set nofoldenable
-" folds must be defined by entering commands (such as v{motion}zf)
-set foldmethod=manual
+" Set fold method
+set foldmethod=syntax
 " Don't autofold anything (but I can still fold manually)
 set foldlevelstart=99
 " Highlight problematic whitespace
