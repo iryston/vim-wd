@@ -389,6 +389,16 @@ let loaded_matchparen = 1
 set incsearch
 " Highlight search terms
 set hlsearch
+if exists('+inccommand')
+  set inccommand=nosplit
+endif
+if executable('rg')
+  set grepformat=%f:%l:%m
+  let &grepprg = 'rg --vimgrep' . (&smartcase ? ' --smart-case' : '')
+elseif executable('ag')
+  set grepformat=%f:%l:%m
+  let &grepprg = 'ag --vimgrep' . (&smartcase ? ' --smart-case' : '')
+endif
 " Windows can be 0 line high
 set winminheight=0
 " Case insensitive search
