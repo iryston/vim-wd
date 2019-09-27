@@ -399,11 +399,21 @@ set smartcase
 set wildmenu
 " Command <Tab> completion, list matches, then longest common part, then all
 set wildmode=list:longest,full
+set wildoptions=tagfile
+set wildignorecase
 " Stuff to ignore when tab completing
-set wildignore=*.o,*.obj,*~
-set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=.git,.hg,.svn,.stversions,*.pyc,*.spl,*.o,*.obj,*.out,*~,%*
+set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
+set wildignore+=**/node_modules/**,**/bower_modules/**,*/.sass-cache/*
+set wildignore+=application/vendor/**,**/vendor/ckeditor/**,media/vendor/**
+set wildignore+=__pycache__,*.egg-info,.pytest_cache
+" Enter key will select the highlighted menu item
+inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
+" Keep a menu item always highlighted
+inoremap <expr> <c-n> pumvisible() ? '<c-n>' :
+  \ '<c-n><c-r>=pumvisible() ? "\<lt>Down>" : ""<cr>'
+inoremap <expr> <M-,> pumvisible() ? '<c-n>' :
+  \ '<c-x><c-o><c-n><c-p><c-r>=pumvisible() ? "\<lt>Down>" : ""<cr>'
 " Backspace and cursor keys wrap too
 set whichwrap=b,s,h,l,<,>,[,]
 " Lines to scroll when cursor leaves screen
