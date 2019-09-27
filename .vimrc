@@ -410,6 +410,8 @@ set whichwrap=b,s,h,l,<,>,[,]
 set scrolljump=1
 " Minimum lines to keep above and below cursor
 set scrolloff=2
+" Minimum columns to keep to the left and right of the cursor
+set sidescrolloff=4
 " Display as much as possibe of a window's last line
 set display+=lastline
 " Turn off folding
