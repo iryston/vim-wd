@@ -1472,6 +1472,16 @@ set title
 " Resize windows as little as possible
 set noequalalways
 
+if exists('&pumblend')
+	" Disable pseudo-transparency for completion menu
+	set pumblend=0
+endif
+
+if exists('&winblend')
+	" Disable pseudo-transparency for floating window
+	set winblend=0
+endif
+
 " ----------------------------------------------------------------------------
 " Encoding menu {
 " ----------------------------------------------------------------------------
