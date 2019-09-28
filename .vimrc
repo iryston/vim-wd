@@ -26,9 +26,21 @@ scriptencoding utf-8
 set fileencodings=utf-8,cp1251,koi8-r,cp866
 " For Russian users
 set keymap=russian-jcukenwin
-set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;
-      \`qwertyuiop[]asdfghjkl\\;
-      \'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
+" Russian langmap for standard PC keyboard
+if has('langmap')
+  set langmap=йцукенгшщзхъ;qwertyuiop[]
+  set langmap+=фывапролджэё;asdfghjkl\\;'\\\
+  set langmap+=ячсмитьбю;zxcvbnm\\,.
+  set langmap+=ЙЦУКЕНГШЩЗХЪ;QWERTYUIOP{}
+  set langmap+=ФЫВАПРОЛДЖЭЁ;ASDFGHJKL\\:\\"\\~
+  set langmap+=ЯЧСМИТЬБЮ;ZXCVBNM<>
+  set langmap+=№#
+  if exists('+langremap')
+    " Prevent that the langmap option applies to characters
+    " that result from a mapping.
+    set nolangremap
+  endif
+endif
 setlocal spell spelllang=ru_yo,en_us
 set iskeyword=@,48-57,_,168,184,192-255
 set iminsert=0
