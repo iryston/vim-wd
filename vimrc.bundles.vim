@@ -236,7 +236,9 @@
   " Go Lang {
   " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'go')
-      Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+      if executable('go')
+        Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+      endif
     endif
   " }
 
