@@ -82,8 +82,8 @@
       Plug 'mileszs/ack.vim'
       let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
     elseif executable('ack-grep')
-      let g:ackprg='ack-grep -H --nocolor --nogroup --column'
       Plug 'mileszs/ack.vim'
+      let g:ackprg = 'ack-grep -H --nocolor --nogroup --column'
     elseif executable('ack')
       Plug 'mileszs/ack.vim'
     endif
@@ -92,39 +92,25 @@
   " --------------------------------------------------------------------------
   " Available bundle groups:
   " --------------------------------------------------------------------------
-  " [ 'general'
-  " \, 'clojure'
-  " \, 'codecompletion'
-  " \, 'colorschemes'
-  " \, 'go'
-  " \, 'haskell'
-  " \, 'html'
-  " \, 'javascript'
-  " \, 'misc'
-  " \, 'php'
-  " \, 'programming'
-  " \, 'python'
-  " \, 'ruby'
-  " \, 'rust'
-  " \, 'tmux'
-  " \, 'scala'
-  " \, 'writing'
-  " \ ]
-
-    let g:bundle_groups=[ 'general'
-          \, 'codecompletion'
-          \, 'colorschemes'
-          \, 'go'
-          \, 'html'
-          \, 'javascript'
-          \, 'misc'
-          \, 'php'
-          \, 'programming'
-          \, 'python'
-          \, 'ruby'
-          \, 'tmux'
-          \, 'writing'
-          \ ]
+  let g:bundle_groups = ['']
+  " Uncomment nesesary groups below
+  call add(g:bundle_groups, 'general')
+  " call add(g:bundle_groups, 'clojure')
+  call add(g:bundle_groups, 'codecompletion')
+  call add(g:bundle_groups, 'colorschemes')
+  call add(g:bundle_groups, 'go')
+  " call add(g:bundle_groups, 'haskell')
+  call add(g:bundle_groups, 'html')
+  call add(g:bundle_groups, 'javascript')
+  call add(g:bundle_groups, 'misc')
+  call add(g:bundle_groups, 'php')
+  call add(g:bundle_groups, 'programming')
+  call add(g:bundle_groups, 'python')
+  call add(g:bundle_groups, 'ruby')
+  " call add(g:bundle_groups, 'rust')
+  " call add(g:bundle_groups, 'scala')
+  call add(g:bundle_groups, 'tmux')
+  call add(g:bundle_groups, 'writing')
 
   " --------------------------------------------------------------------------
   " General {
