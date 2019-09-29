@@ -1460,11 +1460,11 @@ if has('gui_running')
   elseif WINDOWS() && has("gui_running")
     set guifont=Iosevka_Term:h17,IBM_Plex_Mono:h15,Roboto_Mono_Light:h15,InputMono_Light:h14,Consolas:h17,Source_Code_Pro:h15,Cousine:h15,Hack_Regular:h15,Menlo_Regular:h15,Ubuntu_Mono:18,Courier_New:h16
   endif
+  " Set default background to dark
+  set background=dark
   " Set gruvbox colorscheme variant
   let g:gruvbox_contrast_dark='medium'
   let g:gruvbox_contrast_light='hard'
-  " Set default background to dark
-  set background=dark
   " colorscheme gruvbox
   colorscheme cosmic_latte
 else
@@ -1479,22 +1479,22 @@ else
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
   endif
-  if has('termguicolors')
+  if has('termguicolors') && $COLORTERM =~# '^\%(truecolor\|24bit\)$'
     set termguicolors
   endif
-  " Set gruvbox colorscheme variant
-  let g:gruvbox_contrast_dark='medium'
-  let g:gruvbox_contrast_light='hard'
   " Set default background to dark
   set background=dark
   " Check iTerm2 background
   if OSX()
-    if !exists('$ITERM_PROFILE') || $ITERM_PROFILE == 'Light'
+    if exists('$ITERM_PROFILE') && $ITERM_PROFILE == 'Light'
       set background=light
     else
       set background=dark
     endif
   endif
+  " Set gruvbox colorscheme variant
+  let g:gruvbox_contrast_dark='medium'
+  let g:gruvbox_contrast_light='hard'
   " colorscheme gruvbox
   colorscheme cosmic_latte
 endif
