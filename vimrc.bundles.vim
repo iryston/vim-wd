@@ -237,7 +237,8 @@
   " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'go')
       if executable('go')
-        Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+        " To update all Go dependencies run :GoUpdateBinaries
+        Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
       endif
     endif
   " }
