@@ -1745,6 +1745,7 @@ endfunction
 
 call s:map_change_option('p', 'paste')
 call s:map_change_option('n', 'number')
+call s:map_change_option('r', 'relativenumber')
 call s:map_change_option('w', 'wrap')
 call s:map_change_option('h', 'hlsearch')
 call s:map_change_option('m', 'mouse', 'let &mouse = &mouse == "" ? "a" : ""')
