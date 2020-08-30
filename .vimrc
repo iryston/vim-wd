@@ -1022,7 +1022,7 @@ endif
 
 " File preview using Highlight (http://www.andre-simon.de/doku/highlight/en/highlight.php)
 let g:fzf_files_options = printf('--preview "%s {} | head -'.&lines.'"',
-  \ g:plugs['fzf.vim'].dir.'/bin/preview.rb')
+  \ g:plugs['fzf.vim'].dir.'/bin/preview.sh')
 
 " Search includes hidden files (:FilesAll)
 " TODO unify options
