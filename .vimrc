@@ -20,6 +20,8 @@ endif
 set shortmess=atI
 set langmenu=en
 set helplang=en
+" Encoding
+if &encoding !=? 'utf-8' | let &termencoding = &encoding | endif
 set encoding=utf-8
 scriptencoding utf-8
 " Autoset order for file character encodings
