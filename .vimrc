@@ -1092,6 +1092,7 @@ command! Plugs
 " ----------------------------------------------------------------------------
 " Setting the author var
 let g:snips_author = 'Igor R. Plity <iryston@iryston.net>'
+let g:snipMate = { 'snippet_version' : 1 }
 " }
 
 " ----------------------------------------------------------------------------
