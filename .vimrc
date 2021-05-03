@@ -1487,19 +1487,18 @@ else
   endif
   " Set default background to dark
   set background=dark
-  " Check iTerm2 background
-  if OSX()
-    if exists('$ITERM_PROFILE') && $ITERM_PROFILE == 'Light'
-      set background=light
-    else
-      set background=dark
-    endif
-  endif
   " Set gruvbox colorscheme variant
   let g:gruvbox_contrast_dark='medium'
   let g:gruvbox_contrast_light='hard'
   " colorscheme gruvbox
   colorscheme cosmic_latte
+endif
+
+" Adopt background to a system-wide appearance
+if OSX() && system('defaults read -g AppleInterfaceStyle') =~ '^Dark'
+   set background=dark
+else
+  set background=light
 endif
 
 " Set the title of the window in the terminal to the file
