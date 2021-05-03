@@ -168,8 +168,7 @@
   " Color Schemes {
   " --------------------------------------------------------------------------
     if count(g:bundle_groups, 'colorschemes')
-      Plug 'iryston/gruvbox'
-      Plug 'nightsense/cosmic_latte'
+      Plug 'iryston/cosmic_latte'
     endif
   " }
 

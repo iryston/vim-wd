@@ -1463,13 +1463,6 @@ if has('gui_running')
   elseif WINDOWS()
     set guifont=JetBrains_Mono:h19,IBM_Plex_Mono:h15,Roboto_Mono_Light:h15,InputMono_Light:h14,Consolas:h17,Source_Code_Pro:h15,Cousine:h15,Hack_Regular:h15,Menlo_Regular:h15,Ubuntu_Mono:18,Courier_New:h16
   endif
-  " Set default background to dark
-  set background=dark
-  " Set gruvbox colorscheme variant
-  let g:gruvbox_contrast_dark='medium'
-  let g:gruvbox_contrast_light='hard'
-  " colorscheme gruvbox
-  colorscheme cosmic_latte
 else
   if &term == 'xterm' || &term == 'xterm-256color' || &term == 'screen' || &term == 'screen-256color'
     set t_Co=256 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
@@ -1485,14 +1478,11 @@ else
   if has('termguicolors') && $COLORTERM =~# '^\%(truecolor\|24bit\)$'
     set termguicolors
   endif
-  " Set default background to dark
-  set background=dark
-  " Set gruvbox colorscheme variant
-  let g:gruvbox_contrast_dark='medium'
-  let g:gruvbox_contrast_light='hard'
-  " colorscheme gruvbox
-  colorscheme cosmic_latte
 endif
+
+" Set default background to dark
+set background=dark
+colorscheme cosmic_latte
 
 " Adopt background to a system-wide appearance
 if OSX() && system('defaults read -g AppleInterfaceStyle') =~ '^Dark'
