@@ -909,6 +909,22 @@ inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype
 
 " }
 
+" ----------------------------------------------------------------------------
+" Netrw customization.
+" ----------------------------------------------------------------------------
+" Keep the current directory and the browsing directory synced.
+let g:netrw_keepdir = 0
+" Hide the banner. To show it temporarily use 'I' inside Netrw.
+let g:netrw_banner = 0
+" Set preferred view type. Toggle with 'i'
+let g:netrw_liststyle = 3
+" Hide dotfiles on load. Toggle dotfiles with 'gh'
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+"Change the copy command. Mostly to enable recursive copy of directories.
+let g:netrw_localcopydircmd = 'cp -r'
+"Highlight marked files in the same way search matches are.
+hi! link netrwMarkFile Search
+
 " ############################################################################
 " Plugins {
 " ############################################################################
