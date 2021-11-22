@@ -267,7 +267,6 @@
       " Plug 'ap/vim-css-color', { 'for': ['css', 'html', 'less', 'sass', 'scss', 'stylus'] }
       " Plug 'digitaltoad/vim-pug', { 'for': ['html', 'pug'] }
       " Plug 'hail2u/vim-css3-syntax'
-      Plug 'kewah/vim-stylefmt'
       Plug 'mattn/emmet-vim', { 'for': ['css', 'html', 'htmldjango', 'jinja', 'xsl'] }
       " Plug 'tpope/vim-haml'
     endif
