@@ -909,6 +909,22 @@ inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype
 
 " }
 
+" ----------------------------------------------------------------------------
+" Netrw customization.
+" ----------------------------------------------------------------------------
+" Keep the current directory and the browsing directory synced.
+let g:netrw_keepdir = 0
+" Hide the banner. To show it temporarily use 'I' inside Netrw.
+let g:netrw_banner = 0
+" Set preferred view type. Toggle with 'i'
+let g:netrw_liststyle = 3
+" Hide dotfiles on load. Toggle dotfiles with 'gh'
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+"Change the copy command. Mostly to enable recursive copy of directories.
+let g:netrw_localcopydircmd = 'cp -r'
+"Highlight marked files in the same way search matches are.
+hi! link netrwMarkFile Search
+
 " ############################################################################
 " Plugins {
 " ############################################################################
@@ -1452,24 +1468,17 @@ if has('gui_running')
   set guioptions-=L
   "Maximize window on start
   set lines=999 columns=999
-  if OSX() && has("gui_running")
+  if OSX()
     set fullscreen
   endif
   " Set font according to system
-  if LINUX() && has("gui_running")
+  if LINUX()
     set guifont=JetBrains\ Mono\ 19,IBM\ Plex\ Mono\ 15,Roboto\ Mono\ Light\ 15,Input\ Mono\ Light\ 14,Consolas\ 17,Source\ Code\ Pro\ 15,Cousine\ 15,Hack\ 15,Ubuntu\ Mono\ 18,Menlo\ Regular\ 15,Courier\ New\ 16
-  elseif OSX() && has("gui_running")
+  elseif OSX()
     set guifont=JetBrains\ Mono:h19,IBM\ Plex\ Mono:h15,Roboto\ Mono\ Light:h15,InputMono\ Light:h14,Consolas:h17,Source\ Code\ Pro:h15,Cousine:h15,Hack\ Regular:h15,Menlo\ Regular:h15,Ubuntu\ Mono:18,Courier\ New:h16
-  elseif WINDOWS() && has("gui_running")
+  elseif WINDOWS()
     set guifont=JetBrains_Mono:h19,IBM_Plex_Mono:h15,Roboto_Mono_Light:h15,InputMono_Light:h14,Consolas:h17,Source_Code_Pro:h15,Cousine:h15,Hack_Regular:h15,Menlo_Regular:h15,Ubuntu_Mono:18,Courier_New:h16
   endif
-  " Set default background to dark
-  set background=dark
-  " Set gruvbox colorscheme variant
-  let g:gruvbox_contrast_dark='medium'
-  let g:gruvbox_contrast_light='hard'
-  " colorscheme gruvbox
-  colorscheme cosmic_latte
 else
   if &term == 'xterm' || &term == 'xterm-256color' || &term == 'screen' || &term == 'screen-256color'
     set t_Co=256 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
@@ -1485,21 +1494,17 @@ else
   if has('termguicolors') && $COLORTERM =~# '^\%(truecolor\|24bit\)$'
     set termguicolors
   endif
-  " Set default background to dark
-  set background=dark
-  " Check iTerm2 background
-  if OSX()
-    if exists('$ITERM_PROFILE') && $ITERM_PROFILE == 'Light'
-      set background=light
-    else
-      set background=dark
-    endif
-  endif
-  " Set gruvbox colorscheme variant
-  let g:gruvbox_contrast_dark='medium'
-  let g:gruvbox_contrast_light='hard'
-  " colorscheme gruvbox
-  colorscheme cosmic_latte
+endif
+
+" Set default background to dark
+set background=dark
+colorscheme cosmic_latte
+
+" Adopt background to a system-wide appearance
+if OSX() && system('defaults read -g AppleInterfaceStyle') =~ '^Dark'
+   set background=dark
+else
+  set background=light
 endif
 
 " Set the title of the window in the terminal to the file
